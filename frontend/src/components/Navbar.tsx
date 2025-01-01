@@ -1,4 +1,5 @@
 "use client";
+import { IKImage } from "imagekitio-next";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -8,7 +9,13 @@ export default function Navbar() {
     <nav className="w-full h-16 md:h-20 flex items-center justify-between text-[#14213D]">
       {/* Logo */}
       <div className="flex items-center g-4">
-        <Image src="/logo-v2.png" width={70} height={70} alt="mern blog logo" />
+        <IKImage
+          path="/logo-v2.png"
+          width={70}
+          height={70}
+          alt="mern blog logo"
+          urlEndpoint={process.env.NEXT_PUBLIC_URL_ENDPOINT}
+        />
         <span className="text-xl font-bold">MERN Blog</span>
       </div>
       {/* Mobile Menu */}
