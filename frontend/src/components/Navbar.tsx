@@ -9,7 +9,12 @@ export default function Navbar() {
     <nav className="w-full h-16 md:h-20 flex items-center justify-between text-[#14213D]">
       {/* Logo */}
       <div className="flex items-center g-4">
-        <ImageComponent src="/logo-v2.png" />
+        <ImageComponent
+          src="/logo-v2.png"
+          width={70}
+          height={70}
+          alt="mern blog logo"
+        />
         <span className="text-xl font-bold">MERN Blog</span>
       </div>
       {/* Mobile Menu */}
