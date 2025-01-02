@@ -23,7 +23,7 @@ export default function Navbar() {
         )}
         {/* Mobile Link List */}
         <div
-          className={`w-full flex flex-col justify-center items-center gap-8 absolute top-16 z-10 bg-white font-medium text-lg h-screen duration-150 transition-all ease-in-out ${
+          className={`w-full flex flex-col justify-center items-center gap-8 absolute top-16 z-10 bg-[#e5e5e5] font-medium text-lg h-screen duration-150 transition-all ease-in-out ${
             open ? "left-0" : "left-[100%]"
           }`}
         >
