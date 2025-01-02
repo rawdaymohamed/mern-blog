@@ -26,7 +26,7 @@ export default function Home() {
         <WriteButton className="self-start md:self-auto" />
       </div>
       {/* Main Categories */}
-      <MainCategories />
+      <MainCategories className="mt-5" />
       {/* Featured Posts */}
       {/* Post List */}
     </div>
