@@ -3,6 +3,7 @@
 import { FaBookOpen } from "react-icons/fa";
 import { useState } from "react";
 import Link from "next/link";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
@@ -22,7 +23,7 @@ export default function Navbar() {
         )}
         {/* Mobile Link List */}
         <div
-          className={`w-full flex flex-col justify-center items-center gap-8  absolute top-16 font-medium text-lg h-screen duration-150 transition-all ease-in-out ${
+          className={`w-full flex flex-col justify-center items-center gap-8 absolute top-16 z-10 bg-white font-medium text-lg h-screen duration-150 transition-all ease-in-out ${
             open ? "left-0" : "left-[100%]"
           }`}
         >
@@ -30,11 +31,17 @@ export default function Navbar() {
           <Link href="/">Trending</Link>
           <Link href="/">Most Popular</Link>
           <Link href="/">About</Link>
-          <Link href="/">
-            <button className="px-4 py-2 rounded-2xl bg-[#14213D] text-gray-50 ">
-              Login 👋
-            </button>
-          </Link>
+          <SignedOut>
+            <Link href="/sign-in">
+              <button className="px-4 py-2 rounded-2xl bg-[#14213D] text-gray-50 ">
+                Login 👋
+              </button>
+            </Link>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <Link href="/"></Link>
         </div>
       </div>
       {/* Desktop Menu */}
@@ -43,11 +50,17 @@ export default function Navbar() {
         <Link href="/">Trending</Link>
         <Link href="/">Most Popular</Link>
         <Link href="/">About</Link>
-        <Link href="/">
-          <button className="px-4 py-2 rounded-2xl bg-[#14213D] text-gray-50 ">
-            Login 👋
-          </button>
-        </Link>
+        <Link href="/"></Link>
+        <SignedOut>
+          <Link href="/sign-in">
+            <button className="px-4 py-2 rounded-2xl bg-[#14213D] text-gray-50 -ml-8">
+              Login 👋
+            </button>
+          </Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </nav>
   );
