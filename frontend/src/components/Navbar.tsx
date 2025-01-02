@@ -22,27 +22,29 @@ export default function Navbar() {
           <span className="text-4xl font-bold">☰</span> // Hamburger Icon
         )}
         {/* Mobile Link List */}
-        <div
-          className={`w-full flex flex-col justify-center items-center gap-8 absolute top-16 z-10 bg-[#e5e5e5] font-medium text-lg h-screen duration-150 transition-all ease-in-out ${
-            open ? "left-0" : "left-[100%]"
-          }`}
-        >
-          <Link href="/">Home</Link>
-          <Link href="/">Trending</Link>
-          <Link href="/">Most Popular</Link>
-          <Link href="/">About</Link>
-          <SignedOut>
-            <Link href="/sign-in">
-              <button className="px-4 py-2 rounded-2xl bg-[#14213D] text-gray-50 ">
-                Login 👋
-              </button>
-            </Link>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          <Link href="/"></Link>
-        </div>
+        {open && (
+          <div
+            className={`w-full flex flex-col justify-center items-center gap-8 absolute top-16 z-10 bg-[#e5e5e5] font-medium text-lg h-screen duration-150 transition-all ease-in-out ${
+              open ? "left-0" : "left-[100%]"
+            }`}
+          >
+            <Link href="/">Home</Link>
+            <Link href="/">Trending</Link>
+            <Link href="/">Most Popular</Link>
+            <Link href="/">About</Link>
+            <SignedOut>
+              <Link href="/sign-in">
+                <button className="px-4 py-2 rounded-2xl bg-[#14213D] text-gray-50 ">
+                  Login 👋
+                </button>
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <Link href="/"></Link>
+          </div>
+        )}
       </div>
       {/* Desktop Menu */}
       <div className="hidden md:flex gap-6 xl:gap-8  font-medium items-center">
