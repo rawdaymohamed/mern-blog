@@ -1,5 +1,6 @@
 import Link from "next/link";
 import WriteButton from "@/components/WriteButton";
+import MainCategories from "@/components/MainCategories";
 export default function Home() {
   return (
     <div className="mt-4 flex flex-col gap-4">
@@ -10,7 +11,7 @@ export default function Home() {
         <span className="text-[#14213D]">Blogs and Articles</span>
       </div>
       {/* Introduction */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-5 mt-5">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-8 mt-5">
         {/* titles */}
         <div className="flex flex-col gap-5 md:w-4/5">
           <h1 className="text-2xl md:text-2xl lg:text-3xl font-bold text-gray-800">
@@ -22,8 +23,10 @@ export default function Home() {
             through the power of blogging.
           </p>
         </div>
-        <WriteButton />
+        <WriteButton className="self-start md:self-auto" />
       </div>
+      {/* Main Categories */}
+      <MainCategories />
       {/* Featured Posts */}
       {/* Post List */}
     </div>
