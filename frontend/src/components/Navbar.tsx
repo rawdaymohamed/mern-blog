@@ -1,21 +1,15 @@
 "use client";
 
+import { FaBookOpen } from "react-icons/fa";
 import { useState } from "react";
-import ImageComponent from "./ImageComponent";
 import Link from "next/link";
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <nav className="w-full h-16 md:h-20 flex items-center justify-between text-[#14213D]">
       {/* Logo */}
       <Link href="/" className="flex items-center g-4">
-        <ImageComponent
-          src="/logo-v2.png"
-          width={70}
-          height={70}
-          alt="mern blog logo"
-        />
+        <FaBookOpen className="w-9 h-9 mr-4" />
         <span className="text-xl font-bold">MERN Blog</span>
       </Link>
       {/* Mobile Menu */}
