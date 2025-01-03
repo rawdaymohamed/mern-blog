@@ -8,7 +8,7 @@ interface ImageComponentProps {
 }
 export default function ImageComponent({
   src,
-  className = "",
+  className,
   width,
   height,
   alt,
@@ -23,6 +23,9 @@ export default function ImageComponent({
       lqip={{ active: true, quality: 20 }}
       className={className}
       urlEndpoint={process.env.NEXT_PUBLIC_URL_ENDPOINT}
+      transformation={[
+        { width: width?.toString(), height: height?.toString() },
+      ]}
     />
   );
 }
