@@ -3,5 +3,9 @@ export default function RecentPosts({
 }: {
   className?: string;
 }) {
-  return <section className={`${className} `}></section>;
+  return (
+    <section className={`${className} `}>
+      <h2>Recent Posts</h2>
+    </section>
+  );
 }

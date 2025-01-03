@@ -2,6 +2,7 @@ import Link from "next/link";
 import WriteButton from "@/components/WriteButton";
 import MainCategories from "@/components/MainCategories";
 import FeaturedPosts from "@/components/FeaturedPosts";
+import RecentPosts from "@/components/RecentPosts";
 export default function Home() {
   return (
     <div className="mt-4 flex flex-col gap-10">
@@ -31,6 +32,7 @@ export default function Home() {
       {/* Featured Posts */}
       <FeaturedPosts />
       {/* Post List */}
+      <RecentPosts />
     </div>
   );
 }

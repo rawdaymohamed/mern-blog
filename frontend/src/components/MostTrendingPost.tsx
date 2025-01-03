@@ -28,6 +28,11 @@ export default function MostTrendingPost({
       <Link href="/" className="font-extrabold text-2xl text-gray-700">
         Top Web Design Trends Shaping the Future of the Web
       </Link>
+      <p className="text-gray-500">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, vel.
+        Saepe officia laudantium aliquam omnis facilis obcaecati. Natus earum
+        facilis ipsam facere necessitatibus...
+      </p>
     </section>
   );
 }
