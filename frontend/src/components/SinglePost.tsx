@@ -8,7 +8,7 @@ interface PostProps {
   imageURL: string;
 }
 export default function SinglePost({
-  className,
+  className = "",
   postNumber,
   title,
   category,

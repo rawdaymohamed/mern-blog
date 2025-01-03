@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-export default function MainCategories({ className }: { className?: string }) {
+export default function MainCategories({
+  className = "",
+}: {
+  className?: string;
+}) {
   return (
     <section
       className={`${className} hidden md:flex bg-white px-10 py-5 rounded-3xl lg:rounded-full text-gray-600 shadow-lg`}

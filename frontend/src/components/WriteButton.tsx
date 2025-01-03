@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Navbar({ className }: { className?: string }) {
+export default function Navbar({ className = "" }: { className?: string }) {
   return (
     <Link
       href="/write"

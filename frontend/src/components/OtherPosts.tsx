@@ -1,6 +1,6 @@
 import SinglePost from "./SinglePost";
 
-export default function OtherPosts({ className }: { className?: string }) {
+export default function OtherPosts({ className = "" }: { className?: string }) {
   return (
     <section className={`${className} flex flex-col gap-10`}>
       {/* First Post */}

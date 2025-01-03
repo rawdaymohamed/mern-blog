@@ -8,7 +8,7 @@ interface ImageComponentProps {
 }
 export default function ImageComponent({
   src,
-  className,
+  className = "",
   width,
   height,
   alt,
