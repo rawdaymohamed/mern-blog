@@ -1,9 +1,10 @@
 import Link from "next/link";
 import WriteButton from "@/components/WriteButton";
 import MainCategories from "@/components/MainCategories";
+import FeaturedPosts from "@/components/FeaturedPosts";
 export default function Home() {
   return (
-    <div className="mt-4 flex flex-col gap-4">
+    <div className="mt-4 flex flex-col gap-10">
       {/* Breadcrump  */}
       <div className="flex gap-2">
         <Link href="/">Home</Link>
@@ -26,8 +27,9 @@ export default function Home() {
         <WriteButton className="self-start md:self-auto" />
       </div>
       {/* Main Categories */}
-      <MainCategories className="mt-5" />
+      <MainCategories />
       {/* Featured Posts */}
+      <FeaturedPosts />
       {/* Post List */}
     </div>
   );
