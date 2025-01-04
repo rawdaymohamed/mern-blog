@@ -54,7 +54,7 @@ export default function RecentSinglePost({
 
         {/* Read more */}
         <Link
-          href="/"
+          href="/test"
           className="text-blue-600 underline underline-offset-4 text-sm"
         >
           Read More

@@ -35,7 +35,7 @@ export default function SinglePost({
           <span className="text-gray-500 text-xs">{time}</span>
         </div>
         {/* Post Title */}
-        <Link href="/" className="font-extrabold text-lg text-gray-600">
+        <Link href="/test" className="font-extrabold text-lg text-gray-600">
           {title}
         </Link>
       </div>

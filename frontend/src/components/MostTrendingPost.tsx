@@ -25,7 +25,7 @@ export default function MostTrendingPost({
         <span className="text-gray-500 text-sm">2 days ago</span>
       </div>
       {/* Post Title */}
-      <Link href="/" className="font-extrabold text-2xl text-gray-700">
+      <Link href="/test" className="font-extrabold text-2xl text-gray-700">
         Top Web Design Trends Shaping the Future of the Web
       </Link>
       <p className="text-gray-500">
