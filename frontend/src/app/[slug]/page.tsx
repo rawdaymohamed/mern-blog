@@ -7,6 +7,7 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import Search from "@/components/Search";
+import Comments from "@/components/Comments";
 const Page = () => {
   return (
     <div className="mt-5 flex flex-col gap-8 text-gray-600">
@@ -209,6 +210,8 @@ const Page = () => {
           <Search />
         </div>
       </div>
+      {/* Comments */}
+      <Comments className="w-full lg:w-8/12" />
     </div>
   );
 };
