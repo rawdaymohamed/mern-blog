@@ -28,7 +28,7 @@ export default function RecentSinglePost({
         alt="web design post"
         width={200}
         height={200}
-        className=" md:hidden xl:block w-full xl:w-2/3 aspect-video rounded-xl mb-1"
+        className=" md:hidden xl:block w-full xl:w-2/3 aspect-video object-cover rounded-xl mb-1"
       />
       <div className="flex flex-col">
         {/* Title */}

@@ -7,7 +7,6 @@ export default function RecentPosts({
 }) {
   return (
     <section className={`${className} `}>
-      <h2 className="mb-5 text-2xl text-gray-700 ">Recent Posts</h2>
       <div className="flex flex-col gap-8">
         <RecentSinglePost
           title="AI in Web Design: Revolutionizing the User Experience"

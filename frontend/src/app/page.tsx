@@ -32,7 +32,10 @@ export default function Home() {
       {/* Featured Posts */}
       <FeaturedPosts />
       {/* Post List */}
-      <RecentPosts />
+      <div>
+        <h2 className="mb-5 text-2xl text-gray-700 ">Recent Posts</h2>
+        <RecentPosts />
+      </div>
     </div>
   );
 }
