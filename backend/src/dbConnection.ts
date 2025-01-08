@@ -3,10 +3,6 @@ import mongoose from 'mongoose'
 
 dotenv.config()
 
-//details from the env
-const dbHost = process.env.DB_HOST;
-const dbName = process.env.DB_NAME;
-const dbPort = process.env.DB_PORT;
 const connectionURL = process.env.CONNECTION_URL;
 
 // Ensure connectionURL is a string
@@ -18,7 +14,7 @@ if (!connectionURL) {
 export const db = mongoose.connect((connectionURL))
     .then(res => {
         if (res) {
-            console.log(`Database connection succeffully to ${dbName}`)
+            console.log(`Database connection succeffully to mongodb`)
         }
 
     }).catch(err => {
