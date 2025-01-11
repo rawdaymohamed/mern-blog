@@ -32,3 +32,19 @@ export const getAll = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const getPost = async (req: Request, res: Response) => {
+    try {
+        const data = await Post.find({ slug: req.params.slug });
+
+        return res.status(201).json({
+            status: "Success",
+            data: data,
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            status: "Failed",
+            message: error.message || "An error occurred while getting the posts",
+        });
+    }
+};
