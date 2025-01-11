@@ -60,7 +60,7 @@ export const deletePost = async (req: Request, res: Response) => {
     } catch (error: any) {
         return res.status(500).json({
             status: "Failed",
-            message: "An error occurred while getting the posts",
+            message: "An error occurred while deleting post",
         });
     }
 };
