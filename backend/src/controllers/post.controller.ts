@@ -48,3 +48,19 @@ export const getPost = async (req: Request, res: Response) => {
         });
     }
 };
+export const deletePost = async (req: Request, res: Response) => {
+    try {
+        const data = await Post.findByIdAndDelete(req.params.id);
+
+        return res.status(200).json({
+            status: "Success",
+            message: "deleted",
+            data: data,
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            status: "Failed",
+            message: "An error occurred while getting the posts",
+        });
+    }
+};
