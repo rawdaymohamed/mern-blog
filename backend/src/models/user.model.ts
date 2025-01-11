@@ -1,12 +1,5 @@
 import { Schema, model } from 'mongoose';
-import Joi from 'joi'
 
-export const UserSchemaValidate = Joi.object({
-    username: Joi.string().required(),
-    email: Joi.string().email().required(),
-    img: Joi.string().optional(),
-    savedPosts: Joi.array().items(Joi.string()).optional(),
-});
 
 //creating an interface 
 interface IUser {
