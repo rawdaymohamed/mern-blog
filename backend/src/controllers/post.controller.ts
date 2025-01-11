@@ -21,6 +21,12 @@ export const getAll = async (req: Request, res: Response) => {
 
 export const getPost = async (req: Request, res: Response) => {
     const data = await Post.findOne({ slug: req.params.slug });
+    if (!data) {
+        return res.status(404).json({
+            status: "Failed",
+            message: "Post not found",
+        });
+    }
     return res.status(200).json({
         status: "Success",
         data: data,
@@ -28,6 +34,12 @@ export const getPost = async (req: Request, res: Response) => {
 };
 export const deletePost = async (req: Request, res: Response) => {
     const data = await Post.findByIdAndDelete(req.params.id);
+    if (!data) {
+        return res.status(404).json({
+            status: "Failed",
+            message: "Post not found",
+        });
+    }
     return res.status(200).json({
         status: "Success",
         message: "deleted",
