@@ -9,7 +9,6 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/test", (req: Request, res: Response) => { res.json({ message: "Test" }) })
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);
