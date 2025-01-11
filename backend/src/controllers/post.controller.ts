@@ -21,7 +21,7 @@ export const getAll = async (req: Request, res: Response) => {
     try {
         const data = await Post.find();
 
-        return res.status(201).json({
+        return res.status(200).json({
             status: "Success",
             data: data,
         });
@@ -37,7 +37,7 @@ export const getPost = async (req: Request, res: Response) => {
     try {
         const data = await Post.findOne({ slug: req.params.slug });
 
-        return res.status(201).json({
+        return res.status(200).json({
             status: "Success",
             data: data,
         });

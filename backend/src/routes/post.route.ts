@@ -6,4 +6,5 @@ const router: Router = express.Router();
 router.post('/', catchAsync(create));
 router.get('/', catchAsync(getAll));
 router.get('/:slug', catchAsync(getPost));
+
 export default router;
