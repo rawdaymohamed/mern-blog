@@ -3,12 +3,13 @@ import { db } from './dbConnection';
 import userRoutes from "./routes/user.route";
 import commentRoutes from "./routes/comment.route";
 import postRoutes from "./routes/post.route";
+import clerkRoutes from "./routes/webhook.route";
 
 const app = express();
 const port = process.env.PORT || 4000;
+app.use("/webhooks", clerkRoutes);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);

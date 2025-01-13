@@ -3,6 +3,7 @@ import { Schema, model } from 'mongoose';
 
 //creating an interface 
 interface IUser {
+    clerkUserId: string;
     username: string,
     email: string,
     img: string,
@@ -10,6 +11,11 @@ interface IUser {
 };
 
 const usersSchema = new Schema<IUser>({
+    clerkUserId: {
+        type: String,
+        required: true,
+        unique: true
+    },
     username: {
         type: String,
         required: true,

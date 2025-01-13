@@ -28,9 +28,7 @@ export const registerValidator = [
     body('img')
         .optional()
         .isString()
-        .withMessage('Image must be a valid string URL')
-        .matches(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|png|gif|webp)$/i)
-        .withMessage('Image must be a valid image URL'),
+        .withMessage('Image must be a valid string URL'),
 
     // Validate 'savedPosts'
     body('savedPosts')
