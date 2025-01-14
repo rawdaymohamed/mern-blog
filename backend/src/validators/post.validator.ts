@@ -23,8 +23,6 @@ export const idValidator = [
     }),
 ];
 export const postValidator = [
-    // Validate 'user' (required ObjectId)
-    body('user', 'User is required').not().isEmpty().isMongoId().withMessage('Invalid user ID'),
 
     // Validate 'img' (optional, must be a valid image URL)
     body('img')
@@ -38,26 +36,12 @@ export const postValidator = [
     body('title', 'Title is required').not().isEmpty().trim().escape(),
     body('title', 'Title must be between 3 and 100 characters').isLength({ min: 3, max: 100 }).trim().escape(),
 
-    // Validate 'slug' (required, unique)
-    body('slug', 'Slug is required').not().isEmpty().trim().escape(),
-    body('slug', 'Slug must contain only letters, numbers, and dashes')
-        .matches(/^[a-zA-Z0-9-]+$/)
-        .trim()
-        .escape(),
-    body('slug').custom(async (slug) => {
-        const existingPost = await Post.findOne({ slug });
-        if (existingPost) {
-            throw new Error('Slug must be unique');
-        }
-    }),
-
     // Validate 'desc' (optional, length up to 500 characters)
     body('desc')
         .optional()
         .isLength({ max: 500 })
         .withMessage('Description cannot exceed 500 characters')
-        .trim()
-        .escape(),
+        .trim(),
 
     // Validate 'category' (optional, default is 'general')
     body('category')

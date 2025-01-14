@@ -5,7 +5,19 @@ import commentRoutes from "./routes/comment.route";
 import postRoutes from "./routes/post.route";
 import clerkRoutes from "./routes/webhook.route";
 import { clerkMiddleware, requireAuth } from '@clerk/express'
+import cors from "cors";
+
 const app = express();
+if (!process.env.CLIENT_URL) {
+    throw new Error("Please provide client url");
+}
+// Configure CORS options
+const corsOptions = {
+    origin: process.env.CLIENT_URL, // Allow requests from this origin
+    credentials: true, // Allow credentials (cookies, authorization headers)
+};
+// Use CORS middleware
+app.use(cors(corsOptions));
 const port = process.env.PORT || 4000;
 app.use(clerkMiddleware());
 app.use("/webhooks", clerkRoutes);

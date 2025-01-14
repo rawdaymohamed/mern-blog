@@ -1,10 +1,27 @@
 "use client";
 import RecentPosts from "@/components/RecentPosts";
 import SideMenu from "@/components/SideMenu";
-import { useState } from "react";
+
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/posts/`
+      );
+      setPosts(response.data.data);
+    };
+
+    fetchPosts();
+  }, []);
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
   return (
     <div className="text-gray-800">
       <h1 className="mt-3 mb-8 text-2xl">Development Blog</h1>

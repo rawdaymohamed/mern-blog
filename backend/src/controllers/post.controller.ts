@@ -9,6 +9,14 @@ export const create = async (req: any, res: Response) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    let counter = 2;
+    let slugBase = req.body.title.toLowerCase().replace(/ /g, "-").replace(/[^a-z0-9-]/g, "");
+    let slug = slugBase;
+    while (await Post.findOne({ slug })) {
+        slug = `${slugBase}-${counter}`;
+        counter++;
+    }
+
     const clerkUserId = req.auth.userId;
     if (!clerkUserId) return res.status(401).json({
         status: "Failure",
@@ -20,7 +28,7 @@ export const create = async (req: any, res: Response) => {
         message: "User not found"
     });
 
-    const data = new Post({ ...req.body, user: user._id });
+    const data = new Post({ ...req.body, user: user._id, slug });
     await data.save();
 
     return res.status(201).json({
