@@ -1,17 +1,4 @@
 import { Schema, model } from 'mongoose';
-import Joi from 'joi'
-
-export const PostSchemaValidate = Joi.object({
-    user: Joi.string().required(),
-    img: Joi.string().email().optional(),
-    title: Joi.string().required(),
-    slug: Joi.string().required(),
-    desc: Joi.string().optional(),
-    category: Joi.string().optional(),
-    content: Joi.string().required(),
-    isFeatured: Joi.boolean(),
-    visit: Joi.number()
-});
 
 //creating an interface 
 interface IPost {

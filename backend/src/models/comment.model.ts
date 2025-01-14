@@ -1,11 +1,4 @@
 import { Schema, model } from 'mongoose';
-import Joi from 'joi'
-
-export const CommentSchemaValidate = Joi.object({
-    user: Joi.string().required(),
-    post: Joi.string().required(),
-    desc: Joi.string().required(),
-});
 
 //creating an interface 
 interface IComment {
