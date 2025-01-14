@@ -67,8 +67,6 @@ export const deletePost = async (req: any, res: Response) => {
         message: "User not found"
     });
 
-    const post = await Post.findById(req.params.id);
-
     const deletedPost = await Post.findOneAndDelete({ _id: req.params.id, user: user._id });
     if (!deletedPost)
         return res.status(403).json({
