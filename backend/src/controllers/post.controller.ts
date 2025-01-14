@@ -2,14 +2,27 @@
 import { Request, Response } from 'express';
 import { Post } from '../models/post.model';
 import { validationResult } from 'express-validator';
+import { User } from '../models/user.model';
 
-export const create = async (req: Request, res: Response) => {
+export const create = async (req: any, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    const clerkUserId = req.auth.userId;
+    if (!clerkUserId) return res.status(401).json({
+        status: "Failure",
+        message: "Unauthenticated"
+    })
+    const user = await User.findOne({ clerkUserId });
+    if (!user) return res.status(404).json({
+        status: "Failure",
+        message: "User not found"
+    });
 
-    const data = await Post.create(req.body);
+    const data = new Post({ ...req.body, user: user._id });
+    await data.save();
+
     return res.status(201).json({
         status: "Success",
         data: data,
@@ -37,18 +50,35 @@ export const getPost = async (req: Request, res: Response) => {
         data: data,
     });
 };
-export const deletePost = async (req: Request, res: Response) => {
+export const deletePost = async (req: any, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    const clerkUserId = req.auth.userId;
 
-    const data = await Post.findByIdAndDelete(req.params.id);
+    if (!clerkUserId) return res.status(401).json({
+        status: "Failure",
+        message: "Unauthenticated"
+    })
+    const user = await User.findOne({ clerkUserId });
+    if (!user) return res.status(404).json({
+        status: "Failure",
+        message: "User not found"
+    });
 
+    const post = await Post.findById(req.params.id);
+
+    const deletedPost = await Post.findOneAndDelete({ _id: req.params.id, user: user._id });
+    if (!deletedPost)
+        return res.status(403).json({
+            status: "Failure",
+            message: "You can only delete your posts"
+        })
     return res.status(200).json({
         status: "Success",
         message: "deleted",
-        data: data,
+        data: deletedPost,
     });
 
 };
