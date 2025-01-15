@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { FaRegImages, FaVideo } from "react-icons/fa6";
+
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 interface NewPost {
@@ -108,12 +110,22 @@ const Page = () => {
           placeholder="A short description"
           className="p-4 bg-white shadow-sm rounded-md outline-none"
         />
-        <ReactQuill
-          theme="snow"
-          value={value}
-          onChange={setValue}
-          className="flex-1 bg-white shadow-sm rounded-md outline-none"
-        />
+        <div className="mt-5 flex gap-2">
+          <div className="flex flex-col gap-2">
+            <div>
+              <FaRegImages />
+            </div>
+            <div>
+              <FaVideo />
+            </div>
+          </div>
+          <ReactQuill
+            theme="snow"
+            value={value}
+            onChange={setValue}
+            className="flex-1 bg-white shadow-sm rounded-md outline-none"
+          />
+        </div>
         <div>
           <button
             type="submit"
