@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
+import Providers from "./providers";
 import Navbar from "@/components/Navbar";
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ export default function RootLayout({
         <body className={`${inter.className} antialiased`}>
           <div className="px-4 md:px-8 xl:px-16 2xl:px-64">
             <Navbar />
-            {children}
+            <Providers>{children}</Providers>
             <ToastContainer position="bottom-right" />
           </div>
         </body>

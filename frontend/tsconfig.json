@@ -28,7 +28,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/Upload.jsx",
-    "src/app/write/page.jsx"
+    "src/app/write/page.jsx",
+    "src/app/_app.jsx",
+    "src/app/posts/page.jsx",
+    "src/components/RecentPosts.jsx"
   ],
   "allowJs": true,
   "exclude": ["node_modules"]

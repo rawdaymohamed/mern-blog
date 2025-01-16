@@ -23,13 +23,15 @@ export default function RecentSinglePost({
       className={`${className} flex flex-col xl:flex-row gap-2 xl:gap-8`}
     >
       {/* Post Image */}
-      <Image
-        src={imageURL}
-        alt="web design post"
-        width={200}
-        height={200}
-        className=" md:hidden xl:block w-full xl:w-2/3 aspect-video object-cover rounded-xl mb-1"
-      />
+      <div className="flex-shrink-0 w-full xl:w-2/3 max-w-[300px]">
+        <Image
+          src={imageURL}
+          alt="web design post"
+          width={200}
+          height={200}
+          className="w-full h-auto object-cover rounded-xl mb-1"
+        />
+      </div>
       <div className="flex flex-col">
         {/* Title */}
         <h2 className="font-extrabold text-2xl md:text-3xl text-gray-700 mb-3">
