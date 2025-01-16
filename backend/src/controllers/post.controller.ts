@@ -39,10 +39,28 @@ export const create = async (req: any, res: Response) => {
 
 };
 export const getAll = async (req: Request, res: Response) => {
-    const data = await Post.find();
+    // Extract 'page' and 'limit' from query parameters and set default values
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 5;
+
+    // Calculate the starting index for pagination
+    const startIndex = (page - 1) * limit;
+
+    // Get the posts with pagination
+    const data = await Post.find()
+        .skip(startIndex)
+        .limit(limit);
+
+    // Get the total count of posts for reference
+    const total = await Post.countDocuments();
+    const hasMore = page * limit < total;
     return res.status(200).json({
         status: "Success",
-        data: data,
+        total,
+        page,
+        limit,
+        hasMore,
+        data
     });
 
 };
