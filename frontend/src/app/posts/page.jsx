@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RecentPosts from "@/components/RecentPosts.jsx";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -11,7 +10,6 @@ const fetchPosts = async () => {
 };
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [posts, setPosts] = useState([]);
   const {
     data,
     error,

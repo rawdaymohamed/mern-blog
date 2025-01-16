@@ -1,10 +1,35 @@
+"use client";
 import Link from "next/link";
 import WriteButton from "@/components/WriteButton";
 import MainCategories from "@/components/MainCategories";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import RecentPosts from "@/components/RecentPosts";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import React from "react";
+const fetchPosts = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
+  return res.json();
+};
 export default function Home() {
-  return (
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPosts,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+  });
+  return status === "pending" ? (
+    <p>Loading...</p>
+  ) : status === "error" ? (
+    <p>Error: {error.message}</p>
+  ) : (
     <div className="mt-4 flex flex-col gap-10">
       {/* Breadcrump  */}
       <div className="flex gap-2">
@@ -34,7 +59,26 @@ export default function Home() {
       {/* Post List */}
       <div>
         <h2 className="mb-5 text-2xl text-gray-700 ">Recent Posts</h2>
-        <RecentPosts />
+        <>
+          {data.pages.map((group, i) => (
+            <React.Fragment key={i}>
+              <RecentPosts posts={group} />
+            </React.Fragment>
+          ))}
+          <div>
+            <button
+              onClick={() => fetchNextPage()}
+              disabled={!hasNextPage || isFetchingNextPage}
+            >
+              {isFetchingNextPage
+                ? "Loading more..."
+                : hasNextPage
+                ? "Load More"
+                : "Nothing more to load"}
+            </button>
+          </div>
+          <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
+        </>
       </div>
     </div>
   );
