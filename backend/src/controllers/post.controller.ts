@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Post } from '../models/post.model';
 import { validationResult } from 'express-validator';
 import { User } from '../models/user.model';
+import ImageKit from 'imagekit';
 
 export const create = async (req: any, res: Response) => {
     const errors = validationResult(req);
@@ -88,3 +89,13 @@ export const deletePost = async (req: any, res: Response) => {
     });
 
 };
+const imagekit = new ImageKit({
+    urlEndpoint: process.env.IK_PUBLIC_URL_ENDPOINT!!,
+    publicKey: process.env.IK_PUBLIC_PUBLIC_KEY!!,
+    privateKey: process.env.IK_PRIVATE_KEY!!
+});
+export const upload_auth = async (req: Request, res: Response) => {
+    let result = imagekit.getAuthenticationParameters();
+    res.send(result);
+
+}
