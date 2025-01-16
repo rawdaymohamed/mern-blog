@@ -20,7 +20,8 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-query": "^3.39.3",
     "react-quill-new": "^3.3.3",
-    "react-toastify": "^11.0.2"
+    "react-toastify": "^11.0.2",
+    "timeago.js": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

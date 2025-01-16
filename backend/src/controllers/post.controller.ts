@@ -48,6 +48,7 @@ export const getAll = async (req: Request, res: Response) => {
 
     // Get the posts with pagination
     const data = await Post.find()
+        .populate("user", "username")
         .skip(startIndex)
         .limit(limit);
 

@@ -36,7 +36,7 @@ export default function Home() {
       <FeaturedPosts />
       {/* Post List */}
       <div>
-        <h2 className="mb-5 text-2xl text-gray-700 ">Recent Posts</h2>
+        <h2 className="mb-12 text-2xl text-gray-700 ">Recent Posts</h2>
         <RecentPosts />
       </div>
     </div>

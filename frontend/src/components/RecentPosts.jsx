@@ -3,9 +3,10 @@ import RecentSinglePost from "./RecentSinglePost";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { format } from "timeago.js";
 const fetchPosts = async (pageParam) => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
-    params: { page: pageParam },
+    params: { page: pageParam, limit: 5 },
   });
   return res.data;
 };
@@ -48,12 +49,13 @@ export default function RecentPosts({ className = "" }) {
                 <RecentSinglePost
                   className="mb-5"
                   key={post._id}
+                  slug={post.slug}
                   title={post.title}
-                  author="Rawda Yasser"
-                  time="2 days ago"
+                  author={post.user.username}
+                  time={format(post.createdAt)}
                   category={post.category}
-                  imageURL="/post-1.jpg"
-                  body={post.content}
+                  imageURL={post.img}
+                  body={post.desc}
                 />
               ))}
             </React.Fragment>

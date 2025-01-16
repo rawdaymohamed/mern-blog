@@ -3,10 +3,11 @@ import Link from "next/link";
 interface PostProps {
   className?: string;
   title: string;
+  slug: string;
   author: string;
   category: string;
   time: string;
-  imageURL: string;
+  imageURL?: string;
   body: string;
 }
 export default function RecentSinglePost({
@@ -17,20 +18,23 @@ export default function RecentSinglePost({
   category,
   imageURL,
   body,
+  slug,
 }: PostProps) {
   return (
     <section
       className={`${className} flex flex-col xl:flex-row gap-2 xl:gap-8`}
     >
       {/* Post Image */}
-      <div className="flex-shrink-0 w-full xl:w-2/3 max-w-[300px]">
-        <Image
-          src={imageURL}
-          alt="web design post"
-          width={200}
-          height={200}
-          className="w-full h-auto object-cover rounded-xl mb-1"
-        />
+      <div className="flex-shrink-0 w-full xl:w-2/3 max-w-[300px] h-[160px] overflow-hidden ">
+        {imageURL && (
+          <Image
+            src={imageURL}
+            alt="web design post"
+            width={200}
+            height={200}
+            className="w-full h-auto object-cover rounded-xl mb-1"
+          />
+        )}
       </div>
       <div className="flex flex-col">
         {/* Title */}
@@ -56,7 +60,7 @@ export default function RecentSinglePost({
 
         {/* Read more */}
         <Link
-          href="/test"
+          href={`${slug}`}
           className="text-blue-600 underline underline-offset-4 text-sm"
         >
           Read More
