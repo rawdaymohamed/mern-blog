@@ -31,7 +31,11 @@
     "src/app/write/page.jsx",
     "src/app/_app.jsx",
     "src/app/posts/page.jsx",
-    "src/components/RecentPosts.jsx"
+    "src/components/RecentPosts.jsx",
+    "src/components/CommentForm.jsx",
+    "src/components/SingleComment.jsx",
+    "src/components/Comments.jsx",
+    "src/app/[slug]/page.jsx"
   ],
   "allowJs": true,
   "exclude": ["node_modules"]

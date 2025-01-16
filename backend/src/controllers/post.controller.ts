@@ -72,7 +72,7 @@ export const getPost = async (req: Request, res: Response) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const data = await Post.findOne({ slug: req.params.slug });
+    const data = await Post.findOne({ slug: req.params.slug }).populate("user", "username img");
     return res.status(200).json({
         status: "Success",
         data: data,
