@@ -118,3 +118,93 @@ export const upload_auth = async (req: Request, res: Response) => {
     res.send(result);
 
 }
+export const saveUnsavePost = async (req: any, res: Response) => {
+    try {
+        const clerkUserId = req.auth?.userId;
+        const { id: postId } = req.params; // Extracts `postId` from URL params.
+
+        if (!clerkUserId) {
+            return res.status(401).json({
+                status: "Failure",
+                message: "Unauthenticated",
+            });
+        }
+
+        const user = await User.findOne({ clerkUserId });
+
+        if (!user) {
+            return res.status(404).json({
+                status: "Failure",
+                message: "User not found",
+            });
+        }
+
+        // Check if the post is already saved
+        const postIndex = user.savedPosts.indexOf(postId);
+
+        if (postIndex === -1) {
+            // Post is not saved, add it to savedPosts
+            user.savedPosts.push(postId);
+            await user.save();
+            return res.status(200).json({
+                status: "Success",
+                message: "Post saved successfully",
+                savedPosts: user.savedPosts,
+            });
+        } else {
+            // Post is already saved, remove it from savedPosts
+            user.savedPosts.splice(postIndex, 1);
+            await user.save();
+            return res.status(200).json({
+                status: "Success",
+                message: "Post unsaved successfully",
+                savedPosts: user.savedPosts,
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: "Failure",
+            message: "An error occurred",
+        });
+    }
+};
+
+
+export const isSaved = async (req: any, res: Response) => {
+    try {
+        const clerkUserId = req.auth?.userId;
+        const { id: postId } = req.params;
+
+        if (!clerkUserId) {
+            return res.status(401).json({
+                status: "Failure",
+                message: "Unauthenticated",
+            });
+        }
+
+        const user = await User.findOne({ clerkUserId });
+
+        if (!user) {
+            return res.status(404).json({
+                status: "Failure",
+                message: "User not found",
+            });
+        }
+
+        // Check if the postId exists in the user's savedPosts
+        const isPostSaved = user.savedPosts.includes(postId);
+
+        return res.status(200).json({
+            status: "Success",
+            message: isPostSaved ? "Post is saved" : "Post is not saved",
+            isSaved: isPostSaved,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: "Failure",
+            message: "An error occurred",
+        });
+    }
+};
