@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -11,24 +10,15 @@ import Search from "@/components/Search";
 import Comments from "@/components/Comments.jsx";
 import axios from "axios";
 import { format } from "timeago.js";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-const Page = () => {
-  const params = useParams();
+const Page = async ({ params }) => {
+  const fetchPost = async (slug) => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`
+    );
+    return res.data.data;
+  };
   const { slug } = params;
-  const [post, setPost] = useState(null);
-  useEffect(() => {
-    const fetchPost = async () => {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`
-      );
-      setPost(res.data.data);
-    };
-
-    fetchPost();
-  }, []);
-
-  console.log("POST", post);
+  const post = await fetchPost(slug);
   if (!post) return "Post not found";
   return (
     <div className="mt-5 flex flex-col gap-8 text-gray-600">
