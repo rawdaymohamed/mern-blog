@@ -6,7 +6,7 @@ import { idValidator, postValidator, slugValidator } from '../validators/post.va
 
 const router: Router = express.Router();
 router.get('/upload-auth', catchAsync(upload_auth));
-router.post('/:id/save', catchAsync(saveUnsavePost));
+router.patch('/:id/save', catchAsync(saveUnsavePost));
 router.get('/:id/is-saved', catchAsync(isSaved));
 router.post('/', postValidator, catchAsync(create));
 router.get('/', catchAsync(getAll));

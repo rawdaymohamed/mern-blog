@@ -6,10 +6,13 @@ import {
   FaRegBookmark,
   FaTrashAlt,
 } from "react-icons/fa";
+
 import Search from "@/components/Search";
+import PostActions from "@/components/PostActions.jsx";
 import Comments from "@/components/Comments.jsx";
 import axios from "axios";
 import { format } from "timeago.js";
+
 const Page = async ({ params }) => {
   const fetchPost = async (slug) => {
     const res = await axios.get(
@@ -19,7 +22,9 @@ const Page = async ({ params }) => {
   };
   const { slug } = params;
   const post = await fetchPost(slug);
+
   if (!post) return "Post not found";
+
   return (
     <div className="mt-5 flex flex-col gap-8 text-gray-600">
       <div className="flex gap-8 items-center mb-5">
@@ -94,19 +99,7 @@ const Page = async ({ params }) => {
             <FaInstagram className="text-2xl  cursor-pointer" />
           </div>
           {/* Actions */}
-          <div className="flex flex-col ">
-            <h2 className="font-bold mb-4">Actions</h2>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2 cursor-pointer">
-                <FaRegBookmark />
-                <span className="text-sm">Save This Post</span>
-              </div>
-              <div className="flex items-center gap-2 text-red-500 cursor-pointer">
-                <FaTrashAlt />
-                <span className="text-sm">Delete This Post</span>
-              </div>
-            </div>
-          </div>
+          <PostActions postId={post._id} />
           {/* Categories */}
           <div>
             <h2 className="font-bold mb-4">Categories</h2>

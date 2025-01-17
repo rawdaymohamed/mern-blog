@@ -83,7 +83,7 @@ export const deletePost = async (req: any, res: Response) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-    const clerkUserId = req.auth.userId;
+    const clerkUserId = req.auth?.userId;
 
     if (!clerkUserId) return res.status(401).json({
         status: "Failure",
