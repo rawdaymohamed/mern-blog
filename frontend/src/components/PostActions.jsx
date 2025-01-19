@@ -1,19 +1,16 @@
 "use client";
 import SavePost from "@/components/SavePost.jsx";
-import { FaTrashAlt } from "react-icons/fa";
+import DeletePost from "@/components/DeletePost.jsx";
 import { useUser } from "@clerk/nextjs";
-export const PostActions = ({ postId }) => {
+export const PostActions = ({ post }) => {
   const { user } = useUser();
+  if (!user) return null;
   return (
     <div className="flex flex-col ">
       <h2 className="font-bold mb-4">Actions</h2>
       <div className="flex flex-col gap-3">
-        <SavePost postId={postId} />
-
-        <div className="flex items-center gap-2 text-red-500 cursor-pointer">
-          <FaTrashAlt />
-          <span className="text-sm">Delete This Post</span>
-        </div>
+        <SavePost post={post} />
+        <DeletePost post={post} />
       </div>
     </div>
   );

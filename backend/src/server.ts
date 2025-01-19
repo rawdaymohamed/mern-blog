@@ -38,10 +38,10 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);
 
-// app.get("/auth-state", (req: any, res) => {
-//     const authState = req.auth;
-//     res.json(authState);
-// })
+app.get("/auth-state", (req: any, res) => {
+    const authState = req.auth;
+    res.json(authState);
+})
 // app.get("/protected", (req: any, res: any) => {
 //     const { userId } = req.auth;
 //     if (!userId)

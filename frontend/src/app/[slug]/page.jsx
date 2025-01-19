@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,18 +13,30 @@ import PostActions from "@/components/PostActions.jsx";
 import Comments from "@/components/Comments.jsx";
 import axios from "axios";
 import { format } from "timeago.js";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
-const Page = async ({ params }) => {
+const Page = () => {
+  const { slug } = useParams();
   const fetchPost = async (slug) => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`
     );
     return res.data.data;
   };
-  const { slug } = params;
-  const post = await fetchPost(slug);
 
-  if (!post) return "Post not found";
+  const {
+    isPending,
+    error,
+    data: post,
+  } = useQuery({
+    queryKey: ["post", slug],
+    queryFn: () => fetchPost(slug),
+  });
+
+  if (isPending) return "loading...";
+  if (error) return "Something went wrong!" + error.message;
+  if (!post) return "Post not found!";
 
   return (
     <div className="mt-5 flex flex-col gap-8 text-gray-600">
@@ -99,7 +112,7 @@ const Page = async ({ params }) => {
             <FaInstagram className="text-2xl  cursor-pointer" />
           </div>
           {/* Actions */}
-          <PostActions postId={post._id} />
+          <PostActions post={post} />
           {/* Categories */}
           <div>
             <h2 className="font-bold mb-4">Categories</h2>

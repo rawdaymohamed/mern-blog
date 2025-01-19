@@ -5,9 +5,9 @@ import { FaRegBookmark } from "react-icons/fa";
 import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 
-export default function savedPost({ postId }) {
+export default function savedPost({ post }) {
   const { getToken } = useAuth();
-
+  const postId = post._id;
   const isSavedInfo = useQuery({
     queryKey: ["isSaved", postId],
     queryFn: async () => {
@@ -24,7 +24,6 @@ export default function savedPost({ postId }) {
     },
   });
   const queryClient = useQueryClient();
-  // isSavedInfo.data.isSaved
   const savePostMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
@@ -46,7 +45,6 @@ export default function savedPost({ postId }) {
     },
   });
   const handleSaveUnsave = () => {
-    console.log(savePostMutation);
     savePostMutation.mutate();
   };
   return (
