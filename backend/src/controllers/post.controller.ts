@@ -217,3 +217,21 @@ export const isSaved = async (req: any, res: Response) => {
         });
     }
 };
+
+export const featureUnFeaturePost = async (req: any, res: Response) => {
+
+    if (req.auth.sessionClaims?.metadata?.role === "admin") {
+        const post = await Post.findOne({ _id: req.params.id }).select("isFeatured");
+
+        const data = await Post.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: { isFeatured: !post?.isFeatured } },
+            { new: true }
+        );
+        return res.json({
+            status: "Success",
+            message: "Post feature updated",
+            data,
+        })
+    }
+};

@@ -1,6 +1,7 @@
 "use client";
 import SavePost from "@/components/SavePost.jsx";
 import DeletePost from "@/components/DeletePost.jsx";
+import FeaturePost from "@/components/FeaturePost.jsx";
 import { useUser } from "@clerk/nextjs";
 export const PostActions = ({ post }) => {
   const { user } = useUser();
@@ -11,6 +12,7 @@ export const PostActions = ({ post }) => {
       <div className="flex flex-col gap-3">
         <SavePost post={post} />
         <DeletePost post={post} />
+        <FeaturePost post={post} />
       </div>
     </div>
   );

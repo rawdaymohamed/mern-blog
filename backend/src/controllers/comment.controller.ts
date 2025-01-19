@@ -22,7 +22,7 @@ export const create = async (req: any, res: Response) => {
 
         const data = new Comment({ ...req.body, user: user._id, post: postId });
         await data.save();
-
+        console.log("comment saved", data)
         return res.status(201).json({
             status: "Success",
             data: data,
@@ -43,4 +43,41 @@ export const getAll = async (req: Request, res: Response) => {
         data: allComments,
     });
 
+}
+
+export const deleteComment = async (req: any, res: Response) => {
+    if (req.auth.sessionClaims?.metadata?.role === "admin") {
+        const data = await Comment.findOneAndDelete({ _id: req.params.id });
+        return res.json({
+            status: "Success",
+            message: "deleted",
+            data,
+        });
+    }
+    const clerkUserId = req.auth?.userId;
+
+    if (!clerkUserId) return res.status(401).json({
+        status: "Failure",
+        message: "Unauthenticated"
+    })
+    const user = await User.findOne({ clerkUserId });
+    if (!user) return res.status(404).json({
+        status: "Failure",
+        message: "User not found"
+    });
+
+
+    console.log("user", user)
+    console.log("clerkId", clerkUserId)
+    const deletedComment = await Comment.findOneAndDelete({ _id: req.params.id, user: user._id });
+    if (!deletedComment)
+        return res.status(403).json({
+            status: "Failure",
+            message: "You can only delete your comments"
+        })
+    return res.status(200).json({
+        status: "Success",
+        message: "deleted",
+        data: deletedComment,
+    });
 }

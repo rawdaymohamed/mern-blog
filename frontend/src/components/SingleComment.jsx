@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import { format } from "timeago.js";
-
+import DeleteComment from "./DeleteComment.jsx";
+import { useUser } from "@clerk/nextjs";
 export default function SingleComment({ className, comment }) {
+  const { user } = useUser();
   return (
     <div className={`${className} flex flex-col gap-2 mb-5 p-4 rounded-xl`}>
       {/* Comment Author */}
@@ -25,6 +27,7 @@ export default function SingleComment({ className, comment }) {
       </div>
       {/* Comment Body */}
       <p className="text-gray-600 text-sm">{comment.desc}</p>
+      {user && <DeleteComment comment={comment} />}
     </div>
   );
 }
