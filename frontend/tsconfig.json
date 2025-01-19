@@ -22,6 +22,21 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/Upload.jsx",
+    "src/app/write/page.jsx",
+    "src/app/_app.jsx",
+    "src/app/posts/page.jsx",
+    "src/components/RecentPosts.jsx",
+    "src/components/CommentForm.jsx",
+    "src/components/SingleComment.jsx",
+    "src/components/Comments.jsx",
+    "src/app/[slug]/page.jsx"
+  ],
+  "allowJs": true,
   "exclude": ["node_modules"]
 }

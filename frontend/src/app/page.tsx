@@ -1,8 +1,11 @@
+"use client";
 import Link from "next/link";
 import WriteButton from "@/components/WriteButton";
 import MainCategories from "@/components/MainCategories";
 import FeaturedPosts from "@/components/FeaturedPosts";
-import RecentPosts from "@/components/RecentPosts";
+import RecentPosts from "@/components/RecentPosts.jsx";
+import React from "react";
+
 export default function Home() {
   return (
     <div className="mt-4 flex flex-col gap-10">
@@ -33,7 +36,7 @@ export default function Home() {
       <FeaturedPosts />
       {/* Post List */}
       <div>
-        <h2 className="mb-5 text-2xl text-gray-700 ">Recent Posts</h2>
+        <h2 className="mb-12 text-2xl text-gray-700 ">Recent Posts</h2>
         <RecentPosts />
       </div>
     </div>

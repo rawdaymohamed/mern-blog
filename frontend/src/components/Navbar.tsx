@@ -6,12 +6,7 @@ import Link from "next/link";
 import { SignedIn, SignedOut, UserButton, useAuth } from "@clerk/nextjs";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { getToken } = useAuth();
-  useEffect(() => {
-    getToken().then((token) => {
-      console.log(token);
-    });
-  }, []);
+
   return (
     <nav className="w-full h-16 md:h-20 flex items-center justify-between text-[#14213D]">
       {/* Logo */}

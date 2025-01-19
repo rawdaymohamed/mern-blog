@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ik.imagekit.io",
         port: "",
+      }, {
+        protocol: 'https',
+        hostname: 'images.clerk.dev',
+        port: '',
       },
     ],
   },
