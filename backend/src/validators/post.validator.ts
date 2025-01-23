@@ -55,7 +55,7 @@ export const postValidator = [
 
     // Validate 'content' (required, length 10–5000 characters)
     body('content', 'Content is required').not().isEmpty().trim(),
-    body('content', 'Content must be between 10 and 5000 characters').isLength({ min: 10, max: 5000 }).trim(),
+    body('content', 'Content must be between 10 and 10000 characters').isLength({ min: 10, max: 10000 }).trim(),
 
     // Validate 'isFeatured' (optional, must be boolean)
     body('isFeatured')

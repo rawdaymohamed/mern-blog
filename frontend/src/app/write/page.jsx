@@ -65,7 +65,7 @@ const Page = () => {
       desc: description,
       content: value,
     };
-    console.log("DATA", data);
+
     try {
       const response = await createPost(data);
       toast.success("Post has been created");

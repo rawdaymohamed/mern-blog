@@ -15,9 +15,10 @@ import axios from "axios";
 import { format } from "timeago.js";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-
+import DOMPurify from "isomorphic-dompurify";
 const Page = () => {
   const { slug } = useParams();
+
   const fetchPost = async (slug) => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`
@@ -33,7 +34,7 @@ const Page = () => {
     queryKey: ["post", slug],
     queryFn: () => fetchPost(slug),
   });
-
+  const cleanedContent = DOMPurify.sanitize(post?.content);
   if (isPending) return "loading...";
   if (error) return "Something went wrong!" + error.message;
   if (!post) return "Post not found!";
@@ -53,12 +54,12 @@ const Page = () => {
             </Link>
             <span>on</span>
             <Link href="/" className="text-blue-600">
-              {post.category}
+              {post?.category}
             </Link>
             <span>{format(post.createdAt)}</span>
           </div>
-          <p className="text-base lg:text-xl xl:text-2xl font-medium leading-relaxed">
-            {post.desc}
+          <p className="text-base lg:text-xl xl:text-lg font-medium leading-relaxed">
+            {post?.desc}
           </p>
         </div>
         {/* Image */}
@@ -79,7 +80,7 @@ const Page = () => {
       <div className="flex flex-col lg:flex-row gap-10 relative">
         {/* Text */}
         <div className="lg:w-9/12 flex flex-col gap-10 text-base lg:text-lg leading-7 text-justify">
-          {post.content}
+          <div dangerouslySetInnerHTML={{ __html: cleanedContent }} />
         </div>
         {/* Menu */}
         <div className="lg:w-3/12 h-max sticky top-8 right-8 flex flex-col gap-5">
