@@ -9,7 +9,7 @@
 
 MERN Blog is a full-stack blogging web application for managing blog posts.
 <br><br>
-![](./imgs/mern-blog-post-rawda-yasser-mohamed-github7.png.png)
+![](./imgs/mern-blog-post-rawda-yasser-mohamed-github7.png)
 ![](./imgs/mern-blog-home-rawda-yasser-mohamed-github.png)
 ![](./imgs/mern-blog-rawda-yasser-mohamed-github2.png)
 ![](./imgs/mern-blog-rawda-yasser-mohamed-github3.png)
