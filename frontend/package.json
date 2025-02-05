@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^6.9.6",
     "@tanstack/react-query": "^5.64.1",
     "axios": "^1.7.9",
+    "clsx": "^2.1.1",
     "imagekitio-next": "^1.0.1",
     "isomorphic-dompurify": "^2.20.0",
     "next": "15.1.3",
