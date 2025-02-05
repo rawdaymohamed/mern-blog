@@ -64,15 +64,13 @@ const Page = () => {
         </div>
         {/* Image */}
         <div className="hidden lg:block lg:w-4/12">
-          {post?.img && (
-            <Image
-              src={post?.img}
-              height={200}
-              width={300}
-              className="rounded-2xl w-full object-cover aspect-video"
-              alt=""
-            />
-          )}
+          <Image
+            src={post?.img}
+            height={200}
+            width={300}
+            className="rounded-2xl w-full object-cover aspect-video"
+            alt=""
+          />
         </div>
       </div>
 

@@ -13,6 +13,7 @@
     --foreground: #ededed;
   }
 }
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -20,6 +21,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
 }
+
 .ql-toolbar,
 .ql-snow,
 .ql-container,
@@ -41,7 +43,7 @@ body {
   transition: background-color 0.3s;
 }
 
-.button--nina > span {
+.button--nina>span {
   display: inline-block;
   padding: 1em 0;
   opacity: 0;
@@ -73,58 +75,58 @@ body {
   transform: translate3d(0, 100%, 0);
 }
 
-.button--nina:hover > span {
+.button--nina:hover>span {
   opacity: 1;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
-.button--nina:hover > span:nth-child(1) {
+.button--nina:hover>span:nth-child(1) {
   -webkit-transition-delay: 0.045s;
   transition-delay: 0.045s;
 }
 
-.button--nina:hover > span:nth-child(2) {
+.button--nina:hover>span:nth-child(2) {
   -webkit-transition-delay: 0.09s;
   transition-delay: 0.09s;
 }
 
-.button--nina:hover > span:nth-child(3) {
+.button--nina:hover>span:nth-child(3) {
   -webkit-transition-delay: 0.135s;
   transition-delay: 0.135s;
 }
 
-.button--nina:hover > span:nth-child(4) {
+.button--nina:hover>span:nth-child(4) {
   -webkit-transition-delay: 0.18s;
   transition-delay: 0.18s;
 }
 
-.button--nina:hover > span:nth-child(5) {
+.button--nina:hover>span:nth-child(5) {
   -webkit-transition-delay: 0.225s;
   transition-delay: 0.225s;
 }
 
-.button--nina:hover > span:nth-child(6) {
+.button--nina:hover>span:nth-child(6) {
   -webkit-transition-delay: 0.27s;
   transition-delay: 0.27s;
 }
 
-.button--nina:hover > span:nth-child(7) {
+.button--nina:hover>span:nth-child(7) {
   -webkit-transition-delay: 0.315s;
   transition-delay: 0.315s;
 }
 
-.button--nina:hover > span:nth-child(8) {
+.button--nina:hover>span:nth-child(8) {
   -webkit-transition-delay: 0.36s;
   transition-delay: 0.36s;
 }
 
-.button--nina:hover > span:nth-child(9) {
+.button--nina:hover>span:nth-child(9) {
   -webkit-transition-delay: 0.405s;
   transition-delay: 0.405s;
 }
 
-.button--nina:hover > span:nth-child(10) {
+.button--nina:hover>span:nth-child(10) {
   -webkit-transition-delay: 0.45s;
   transition-delay: 0.45s;
 }

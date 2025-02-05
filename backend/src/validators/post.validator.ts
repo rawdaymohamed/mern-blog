@@ -26,7 +26,7 @@ export const postValidator = [
 
     // Validate 'img' (optional, must be a valid image URL)
     body('img')
-        .optional()
+        .notEmpty()
         .isString()
         .withMessage('Image must be a valid string URL')
         .matches(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|png|gif|webp)$/i)
