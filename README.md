@@ -63,7 +63,7 @@ cd mern-blog
 
 ```
 cd backend
-npm i
+npm i -f
 npm run dev
 ```
 
@@ -71,7 +71,7 @@ npm run dev
 
 ```
 cd frontend
-npm i
+npm i -f
 npm run dev
 ```
 
