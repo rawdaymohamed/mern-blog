@@ -25,13 +25,16 @@ export default function MostTrendingPost({
         <span className="text-gray-500 text-sm">2 days ago</span>
       </div>
       {/* Post Title */}
-      <Link href="/test" className="font-extrabold text-2xl text-gray-700">
+      <Link
+        href="/mastering-white-space-the-untapped-power-of-negative-space-in-web-design"
+        className="font-extrabold text-2xl text-gray-700"
+      >
         Top Web Design Trends Shaping the Future of the Web
       </Link>
       <p className="text-gray-500">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, vel.
-        Saepe officia laudantium aliquam omnis facilis obcaecati. Natus earum
-        facilis ipsam facere necessitatibus...
+        Discover how strategically using white space (negative space) can
+        elevate your web designs, improve readability, and create a more
+        impactful user experience. Learn practical tips and examples.
       </p>
     </section>
   );
