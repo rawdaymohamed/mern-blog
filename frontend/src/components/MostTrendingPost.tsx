@@ -17,7 +17,7 @@ export default function MostTrendingPost({
         className="object-cover w-full aspect-video rounded-3xl "
       />
       {/* Post details */}
-      <div cla ssName="flex gap-4 items-center">
+      <div className="flex gap-4 items-center">
         <span className="font-bold bg-yellow-100 px-1">01.</span>
         <Link href="/" className="text-blue-600 text-sm">
           Web Design
