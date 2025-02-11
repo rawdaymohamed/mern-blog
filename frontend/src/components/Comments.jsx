@@ -45,10 +45,14 @@ export default function Comments({ className = "", postId }) {
       toast.error(error.response.data);
     },
   });
-  const { variables, mutate, isError } = addCommentMutation;
+  const { mutate, isError } = addCommentMutation;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!user) {
+      toast.error("You must be logged in to post a comment.");
+      return;
+    }
     mutate({ post: postId, desc: comment, user: user?._id });
     setComment("");
   };
@@ -91,9 +95,11 @@ export default function Comments({ className = "", postId }) {
           {addCommentMutation.isPending && (
             <SingleComment
               comment={{
-                user: { img: user.img, username: user.username },
+                user: user
+                  ? { img: user.img, username: user.username }
+                  : { img: "", username: "Anonymous" },
                 createdAt: new Date(),
-                desc: `${addCommentMutation.variables.desc}(sending)`,
+                desc: `${addCommentMutation.variables?.desc || ""} (sending)`,
               }}
             />
           )}
