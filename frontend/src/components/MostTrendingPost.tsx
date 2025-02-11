@@ -26,7 +26,7 @@ export default function MostTrendingPost({
       </div>
       {/* Post Title */}
       <Link
-        href="top-web-design-trends-shaping-the-future-of-the-web"
+        href="/top-web-design-trends-shaping-the-future-of-the-web"
         className="font-extrabold text-2xl text-gray-700"
       >
         Top Web Design Trends Shaping the Future of the Web
