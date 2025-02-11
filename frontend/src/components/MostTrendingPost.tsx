@@ -17,7 +17,7 @@ export default function MostTrendingPost({
         className="object-cover w-full aspect-video rounded-3xl "
       />
       {/* Post details */}
-      <div className="flex gap-4 items-center">
+      <div cla ssName="flex gap-4 items-center">
         <span className="font-bold bg-yellow-100 px-1">01.</span>
         <Link href="/" className="text-blue-600 text-sm">
           Web Design
@@ -26,7 +26,7 @@ export default function MostTrendingPost({
       </div>
       {/* Post Title */}
       <Link
-        href="/mastering-white-space-the-untapped-power-of-negative-space-in-web-design"
+        href="top-web-design-trends-shaping-the-future-of-the-web"
         className="font-extrabold text-2xl text-gray-700"
       >
         Top Web Design Trends Shaping the Future of the Web
