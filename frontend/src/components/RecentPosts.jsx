@@ -5,6 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams.entries()]);
@@ -37,33 +38,35 @@ const PostList = () => {
   console.log("data", allPosts); // debug
 
   return (
-    <InfiniteScroll
-      dataLength={allPosts.length}
-      next={fetchNextPage}
-      hasMore={!!hasNextPage}
-      loader={<h4>Loading more posts...</h4>}
-      endMessage={
-        <p>
-          <b>All posts loaded!</b>
-        </p>
-      }
-    >
-      {allPosts.map((post) =>
-        post ? (
-          <RecentSinglePost
-            className="mb-5"
-            key={post._id}
-            title={post.title}
-            author={post.user.username}
-            time={post.updatedAt}
-            category={post.category}
-            imageURL={post.img}
-            body={post.content}
-            slug={post.slug}
-          />
-        ) : null
-      )}
-    </InfiniteScroll>
+    <Suspense>
+      <InfiniteScroll
+        dataLength={allPosts.length}
+        next={fetchNextPage}
+        hasMore={!!hasNextPage}
+        loader={<h4>Loading more posts...</h4>}
+        endMessage={
+          <p>
+            <b>All posts loaded!</b>
+          </p>
+        }
+      >
+        {allPosts.map((post) =>
+          post ? (
+            <RecentSinglePost
+              className="mb-5"
+              key={post._id}
+              title={post.title}
+              author={post.user.username}
+              time={post.updatedAt}
+              category={post.category}
+              imageURL={post.img}
+              body={post.content}
+              slug={post.slug}
+            />
+          ) : null
+        )}
+      </InfiniteScroll>
+    </Suspense>
   );
 };
 
