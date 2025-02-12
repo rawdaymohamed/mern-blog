@@ -1,80 +1,70 @@
-import React from "react";
+"use client";
+
 import RecentSinglePost from "./RecentSinglePost";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { format } from "timeago.js";
-const fetchPosts = async (pageParam) => {
+import { useSearchParams } from "next/navigation";
+
+const fetchPosts = async (pageParam, searchParams) => {
+  const searchParamsObj = Object.fromEntries([...searchParams.entries()]);
+
+  console.log(searchParamsObj);
+
   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
-    params: { page: pageParam, limit: 5 },
+    params: { page: pageParam, limit: 10, ...searchParamsObj },
   });
+  console.log(res.data.data);
   return res.data;
 };
-export default function RecentPosts({ className = "" }) {
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery({
-    queryKey: ["posts"],
-    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.hasMore ? pages.length : undefined,
-  });
-  const allPosts = data?.pages?.flatMap((page) => page.data);
+
+const PostList = () => {
+  const searchParams = useSearchParams();
+
+  const { data, error, fetchNextPage, hasNextPage, isFetching } =
+    useInfiniteQuery({
+      queryKey: ["posts", searchParams.toString()],
+      queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, searchParams),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, pages) =>
+        lastPage?.hasMore ? pages.length + 1 : undefined,
+    });
+
   if (isFetching) return "Loading...";
   if (error) return "Something went wrong!";
+
+  const allPosts = data?.pages?.flatMap((page) => page?.data || []) || [];
+  console.log("data", allPosts); // debug
+
   return (
-    <section className={`${className} `}>
-      <div className="flex flex-col gap-8">
-        <InfiniteScroll
-          dataLength={allPosts.length} //This is important field to render the next data
-          next={fetchNextPage}
-          hasMore={!!hasNextPage}
-          loader={<h4>Loading more posts...</h4>}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>All posts loaded</b>
-            </p>
-          }
-        >
-          {data.pages.map((group, i) => (
-            <React.Fragment key={i}>
-              {group.data.map((post) => (
-                <RecentSinglePost
-                  className="mb-5"
-                  key={post._id}
-                  slug={post.slug}
-                  title={post.title}
-                  author={post.user.username}
-                  time={format(post.createdAt)}
-                  category={post.category}
-                  imageURL={post.img}
-                  body={post.desc}
-                />
-              ))}
-            </React.Fragment>
-          ))}
-        </InfiniteScroll>
-      </div>
-      <div>
-        <button
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? "Loading more..."
-            : hasNextPage
-            ? "Load More"
-            : "Nothing more to load"}
-        </button>
-      </div>
-      <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
-    </section>
+    <InfiniteScroll
+      dataLength={allPosts.length}
+      next={fetchNextPage}
+      hasMore={!!hasNextPage}
+      loader={<h4>Loading more posts...</h4>}
+      endMessage={
+        <p>
+          <b>All posts loaded!</b>
+        </p>
+      }
+    >
+      {allPosts.map((post) =>
+        post ? (
+          <RecentSinglePost
+            className="mb-5"
+            key={post._id}
+            title={post.title}
+            author={post.user.username}
+            time={post.updatedAt}
+            category={post.category}
+            imageURL={post.img}
+            body={post.content}
+            slug={post.slug}
+          />
+        ) : null
+      )}
+    </InfiniteScroll>
   );
-}
+};
+
+export default PostList;
