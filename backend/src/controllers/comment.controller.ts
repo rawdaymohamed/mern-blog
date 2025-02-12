@@ -12,7 +12,8 @@ export const create = async (req: any, res: Response) => {
         if (!clerkUserId) return res.status(401).json({
             status: "Failure",
             message: "Unauthenticated"
-        })
+        });
+
         const user = await User.findOne({ clerkUserId });
         if (!user) return res.status(404).json({
             status: "Failure",
@@ -22,7 +23,7 @@ export const create = async (req: any, res: Response) => {
 
         const data = new Comment({ ...req.body, user: user._id, post: postId });
         await data.save();
-        console.log("comment saved", data)
+
         return res.status(201).json({
             status: "Success",
             data: data,

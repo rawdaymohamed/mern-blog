@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import RecentPosts from "@/components/RecentPosts.jsx";
 import SideMenu from "@/components/SideMenu";
 
@@ -18,9 +18,9 @@ const Page = () => {
       <div className="flex flex-col-reverse md:flex-row gap-8">
         {/* Post List */}
         <div className="md:w-10/12">
-          <>
+          <Suspense>
             <RecentPosts />
-          </>
+          </Suspense>
         </div>
         <div className={`${isOpen ? "block" : "hidden"} md:block md:w-2/12`}>
           <SideMenu />
