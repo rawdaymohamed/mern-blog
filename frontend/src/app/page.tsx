@@ -4,7 +4,7 @@ import WriteButton from "@/components/WriteButton";
 import MainCategories from "@/components/MainCategories";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import RecentPosts from "@/components/RecentPosts.jsx";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -37,7 +37,9 @@ export default function Home() {
       {/* Post List */}
       <div>
         <h2 className="mb-12 text-2xl text-gray-700 ">Recent Posts</h2>
-        <RecentPosts />
+        <Suspense>
+          <RecentPosts />
+        </Suspense>
       </div>
     </div>
   );
