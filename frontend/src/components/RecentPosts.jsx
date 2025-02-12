@@ -35,7 +35,6 @@ const PostList = () => {
   if (error) return "Something went wrong!";
 
   const allPosts = data?.pages?.flatMap((page) => page?.data || []) || [];
-  console.log("data", allPosts); // debug
 
   return (
     <Suspense>
