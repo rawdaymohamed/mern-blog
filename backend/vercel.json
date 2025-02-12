@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/**/*.js": {
-      "maxDuration": 600
+      "maxDuration": 60
     }
   },
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
