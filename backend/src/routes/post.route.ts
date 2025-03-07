@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { create, getAll, getPost, deletePost, upload_auth, saveUnsavePost, isSaved, featureUnFeaturePost } from "../controllers/post.controller";
+const { create, getAll, getPost, deletePost, upload_auth, saveUnsavePost, isSaved, featureUnFeaturePost } = require("../controllers/post.controller");
 import catchAsync from '../utils/catchAsync';
 import { idValidator, postValidator, slugValidator } from '../validators/post.validator';
 

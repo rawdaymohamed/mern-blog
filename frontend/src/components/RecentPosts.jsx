@@ -5,36 +5,42 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useMemo, useCallback } from "react";
 
-const fetchPosts = async (pageParam, searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams.entries()]);
-
-  console.log(searchParamsObj);
-
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
-    params: { page: pageParam, limit: 10, ...searchParamsObj },
-  });
-  console.log(res.data.data);
-  return res.data;
+const fetchPosts = async ({ pageParam, searchParamsObj }) => {
+  try {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+      params: { page: pageParam, limit: 10, ...searchParamsObj },
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw new Error("Failed to fetch posts");
+  }
 };
 
 const PostList = () => {
   const searchParams = useSearchParams();
 
-  const { data, error, fetchNextPage, hasNextPage, isFetching } =
+  const searchParamsObj = useMemo(
+    () => Object.fromEntries([...searchParams.entries()]),
+    [searchParams]
+  );
+
+  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } =
     useInfiniteQuery({
       queryKey: ["posts", searchParams.toString()],
-      queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, searchParams),
+      queryFn: ({ pageParam = 1 }) =>
+        fetchPosts({ pageParam, searchParamsObj }),
       initialPageParam: 1,
-      getNextPageParam: (lastPage, pages) =>
-        lastPage?.hasMore ? pages.length + 1 : undefined,
+      getNextPageParam: (lastPage) =>
+        lastPage?.hasMore ? lastPage.nextPage : undefined,
     });
 
-  if (isFetching) return "Loading...";
-  if (error) return "Something went wrong!";
+  if (isLoading) return <p>Loading posts...</p>;
+  if (error) return <p className="text-red-500">Something went wrong!</p>;
 
-  const allPosts = data?.pages?.flatMap((page) => page?.data || []) || [];
+  const allPosts = data?.pages?.flatMap((page) => page?.posts || []) || [];
 
   return (
     <Suspense>
@@ -44,26 +50,27 @@ const PostList = () => {
         hasMore={!!hasNextPage}
         loader={<h4>Loading more posts...</h4>}
         endMessage={
-          <p>
-            <b>All posts loaded!</b>
-          </p>
+          <p className="text-center text-gray-600 my-5">All posts loaded!</p>
         }
       >
-        {allPosts.map((post) =>
-          post ? (
-            <RecentSinglePost
-              className="mb-5"
-              key={post._id}
-              title={post.title}
-              author={post.user.username}
-              time={post.updatedAt}
-              category={post.category}
-              imageURL={post.img}
-              body={post.content}
-              slug={post.slug}
-            />
-          ) : null
-        )}
+        <div className="space-y-10">
+          {allPosts.map(
+            (post) =>
+              post && (
+                <RecentSinglePost
+                  className="mb-5"
+                  key={post._id}
+                  title={post.title}
+                  author={post.user.username}
+                  time={post.updatedAt}
+                  category={post.category}
+                  imageURL={post.img}
+                  body={post.content}
+                  slug={post.slug}
+                />
+              )
+          )}
+        </div>
       </InfiniteScroll>
     </Suspense>
   );
