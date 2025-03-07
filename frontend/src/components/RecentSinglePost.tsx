@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
+
 interface PostProps {
   className?: string;
   title: string;
@@ -20,6 +22,7 @@ export default function RecentSinglePost({
   body,
   slug,
 }: PostProps) {
+  const cleanedContent = DOMPurify.sanitize(body);
   return (
     <section
       className={`${className} flex flex-col xl:flex-row gap-2 xl:gap-8`}
@@ -54,9 +57,13 @@ export default function RecentSinglePost({
           <span className="text-gray-500">{time}</span>
         </div>
         {/* Body */}
-        <p className="text-sm xl:text-lg text-gray-500 mb-2">
-          {body.substring(0, 250)}...
-        </p>
+        <div className="text-sm xl:text-lg text-gray-500 mb-2">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: cleanedContent.substring(0, 50),
+            }}
+          />
+        </div>
 
         {/* Read more */}
         <Link

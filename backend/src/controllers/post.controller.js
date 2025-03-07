@@ -1,11 +1,9 @@
-
-import { Request, Response } from 'express';
 import { Post } from '../models/post.model';
 import { validationResult } from 'express-validator';
 import { User } from '../models/user.model';
 import ImageKit from 'imagekit';
 
-export const create = async (req: any, res: Response) => {
+export const create = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -38,35 +36,64 @@ export const create = async (req: any, res: Response) => {
     });
 
 };
-export const getAll = async (req: Request, res: Response) => {
-    // Extract 'page' and 'limit' from query parameters and set default values
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 5;
 
-    // Calculate the starting index for pagination
-    const startIndex = (page - 1) * limit;
+export const getAll = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const query = {};
 
-    // Get the posts with pagination
-    const data = await Post.find()
-        .populate("user", "username")
-        .skip(startIndex)
-        .limit(limit);
+        const { cat, author, search, sort, featured } = req.query;
 
-    // Get the total count of posts for reference
-    const total = await Post.countDocuments();
-    const hasMore = page * limit < total;
-    return res.status(200).json({
-        status: "Success",
-        total,
-        page,
-        limit,
-        hasMore,
-        data
-    });
+        if (cat) query.category = cat;
+        if (search) query.title = { $regex: search, $options: "i" };
+        if (featured) query.isFeatured = true;
 
+        if (author) {
+            const user = await User.findOne({ username: author }).select("_id");
+            if (!user) return res.status(404).json({ message: "No post found!" });
+            query.user = user._id;
+        }
+
+        let sortObj = { createdAt: -1 };
+        switch (sort) {
+            case "oldest":
+                sortObj = { createdAt: 1 };
+                break;
+            case "popular":
+            case "trending":
+                sortObj = { visit: -1 };
+                if (sort === "trending") {
+                    query.createdAt = { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) };
+                }
+                break;
+            default:
+                break;
+        }
+
+        const [posts, totalPosts] = await Promise.all([
+            Post.find(query)
+                .populate("user", "username")
+                .sort(sortObj)
+                .limit(limit)
+                .skip((page - 1) * limit),
+            Post.countDocuments(query),
+        ]);
+
+        res.status(200).json({
+            status: "success",
+            posts,
+            hasMore: page * limit < totalPosts,
+            nextPage: page + 1,
+        });
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 };
 
-export const getPost = async (req: Request, res: Response) => {
+
+export const getPost = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -78,7 +105,7 @@ export const getPost = async (req: Request, res: Response) => {
         data: data,
     });
 };
-export const deletePost = async (req: any, res: Response) => {
+export const deletePost = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -118,16 +145,16 @@ export const deletePost = async (req: any, res: Response) => {
 
 };
 const imagekit = new ImageKit({
-    urlEndpoint: process.env.IK_PUBLIC_URL_ENDPOINT!!,
-    publicKey: process.env.IK_PUBLIC_PUBLIC_KEY!!,
-    privateKey: process.env.IK_PRIVATE_KEY!!
+    urlEndpoint: process.env.IK_PUBLIC_URL_ENDPOINT,
+    publicKey: process.env.IK_PUBLIC_PUBLIC_KEY,
+    privateKey: process.env.IK_PRIVATE_KEY
 });
-export const upload_auth = async (req: Request, res: Response) => {
+export const upload_auth = async (req, res) => {
     let result = imagekit.getAuthenticationParameters();
     res.send(result);
 
 }
-export const saveUnsavePost = async (req: any, res: Response) => {
+export const saveUnsavePost = async (req, res) => {
     try {
         const clerkUserId = req.auth?.userId;
         const { id: postId } = req.params; // Extracts `postId` from URL params.
@@ -180,7 +207,7 @@ export const saveUnsavePost = async (req: any, res: Response) => {
 };
 
 
-export const isSaved = async (req: any, res: Response) => {
+export const isSaved = async (req, res) => {
     try {
         const clerkUserId = req.auth?.userId;
         const { id: postId } = req.params;
@@ -218,7 +245,7 @@ export const isSaved = async (req: any, res: Response) => {
     }
 };
 
-export const featureUnFeaturePost = async (req: any, res: Response) => {
+export const featureUnFeaturePost = async (req, res) => {
 
     if (req.auth.sessionClaims?.metadata?.role === "admin") {
         const post = await Post.findOne({ _id: req.params.id }).select("isFeatured");
