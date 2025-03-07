@@ -7,7 +7,7 @@ const SearchSmall = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-800" // Tailwind classes for styling
+          className="w-full rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-800" // Tailwind classes for styling
         />
         <button
           type="submit"

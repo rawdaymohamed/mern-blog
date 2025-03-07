@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SearchSmall from "./SearchSmall";
 
 export default function MainCategories({
   className = "",
@@ -50,7 +51,7 @@ export default function MainCategories({
           </Link>
         </div>
         {/* Search */}
-        <div className="flex flex-grow gap-3 border border-gray-300 rounded-full bg-slate-100 px-4 py-2">
+        {/* <div className="flex flex-grow gap-3 border border-gray-300 rounded-full bg-slate-100 px-4 py-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -65,7 +66,8 @@ export default function MainCategories({
             placeholder="Search posts..."
             className="bg-transparent flex-grow"
           />
-        </div>
+        </div> */}
+        <SearchSmall />
       </div>
     </section>
   );
