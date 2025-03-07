@@ -36,6 +36,7 @@ const SearchSmall: React.FC = () => {
             setQuery(e.target.value)
           }
           className="w-full rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-800"
+
         />
         <button
           type="submit"

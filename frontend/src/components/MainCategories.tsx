@@ -51,7 +51,6 @@ export default function MainCategories({
           </Link>
         </div>
         {/* Search */}
-
         <SearchSmall />
       </div>
     </section>

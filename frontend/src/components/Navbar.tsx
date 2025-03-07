@@ -1,7 +1,7 @@
 "use client";
 
 import { FaBookOpen } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton, useAuth } from "@clerk/nextjs";
 export default function Navbar() {
@@ -55,7 +55,7 @@ export default function Navbar() {
         )}
       </div>
       {/* Desktop Menu */}
-      <div className="hidden md:flex gap-6 xl:gap-8  font-medium items-center">
+      <div className="hidden md:flex gap-6 xl:gap-8 font-medium items-center">
         <Link href="/">Home</Link>
         <Link href="/">Trending</Link>
         <Link href="/">Most Popular</Link>
