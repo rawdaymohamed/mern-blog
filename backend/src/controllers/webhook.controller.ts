@@ -51,24 +51,27 @@ export const clerkWebHook = async (req: Request, res: Response) => {
             message: err.message,
         })
     }
-
-    // Do something with payload
-    // For this guide, log payload to console
-    const { id } = evt.data
-    const eventType = evt.type
-    // console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
-    if (evt.type === 'user.created') {
-        // console.log('Webhook payload:', evt.data)
-        await User.create({
-            clerkUserId: evt.data.id,
-            username: evt.data.username || evt.data.email_addresses[0].email_address,
-            email: evt.data.email_addresses[0].email_address,
-            img: evt.data.profile_image_url
+    try {
+        // Do something with payload
+        // For this guide, log payload to console
+        const { id } = evt.data
+        const eventType = evt.type
+        // console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+        if (evt.type === 'user.created') {
+            // console.log('Webhook payload:', evt.data)
+            await User.create({
+                clerkUserId: evt.data.id,
+                username: evt.data.username || evt.data.email_addresses[0].email_address,
+                email: evt.data.email_addresses[0].email_address,
+                img: evt.data.profile_image_url
+            })
+        }
+        return void res.status(200).json({
+            success: true,
+            message: 'Webhook received',
         })
+    } catch (err) {
+        return void res.status(400).json({ success: false, message: "Couldn't create user" })
     }
-    return void res.status(200).json({
-        success: true,
-        message: 'Webhook received',
-    })
 }
 
