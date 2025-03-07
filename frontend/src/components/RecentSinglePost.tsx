@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
+import { format } from "timeago.js";
 
 interface PostProps {
   className?: string;
@@ -54,13 +55,13 @@ export default function RecentSinglePost({
           <Link href="/" className="text-blue-600">
             {category}
           </Link>
-          <span className="text-gray-500">{time}</span>
+          <span className="text-gray-500">{format(time)}</span>
         </div>
         {/* Body */}
         <div className="text-sm xl:text-lg text-gray-500 mb-2">
           <div
             dangerouslySetInnerHTML={{
-              __html: cleanedContent.substring(0, 50),
+              __html: cleanedContent.substring(0, 40),
             }}
           />
         </div>
