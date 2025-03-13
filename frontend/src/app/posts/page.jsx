@@ -23,7 +23,7 @@ const Page = () => {
           </Suspense>
         </div>
         <div className={`${isOpen ? "block" : "hidden"} md:block md:w-2/12`}>
-          <Suspense>
+          <Suspense callback={<div>Loading... </div>}>
             <SideMenu />
           </Suspense>
         </div>
