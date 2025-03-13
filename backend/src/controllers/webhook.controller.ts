@@ -71,7 +71,7 @@ export const clerkWebHook = async (req: Request, res: Response) => {
             message: 'Webhook received',
         })
     } catch (err) {
-        return void res.status(400).json({ success: false, message: "Couldn't create user" + `${evt.data}` })
+        return void res.status(400).json({ success: false, message: "Couldn't create user" + `${evt.data.profile_image_url}` })
     }
 }
 
