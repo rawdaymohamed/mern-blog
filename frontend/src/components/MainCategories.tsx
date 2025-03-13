@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SearchSmall from "./SearchSmall";
+import { Suspense } from "react";
 
 export default function MainCategories({
   className = "",
@@ -50,8 +51,11 @@ export default function MainCategories({
             Marketing
           </Link>
         </div>
+
         {/* Search */}
-        <SearchSmall />
+        <Suspense>
+          <SearchSmall />
+        </Suspense>
       </div>
     </section>
   );
