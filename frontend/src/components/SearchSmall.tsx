@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { FaSearch } from "react-icons/fa";
 
 const SearchSmall: React.FC = () => {
@@ -11,8 +11,8 @@ const SearchSmall: React.FC = () => {
   const searchQuery = searchParams.get("search") || "";
   const [query, setQuery] = useState<string>(searchQuery);
 
-  // Update input field if search query in URL changes
   useEffect(() => {
+    // Update input field if search query in URL changes
     setQuery(searchQuery);
   }, [searchQuery]);
 
@@ -25,7 +25,7 @@ const SearchSmall: React.FC = () => {
   };
 
   return (
-    <div>
+    <Suspense>
       <div className="relative w-full">
         <input
           type="text"
@@ -36,7 +36,6 @@ const SearchSmall: React.FC = () => {
             setQuery(e.target.value)
           }
           className="w-full rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-800"
-
         />
         <button
           type="submit"
@@ -49,7 +48,7 @@ const SearchSmall: React.FC = () => {
           />
         </button>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
