@@ -56,9 +56,9 @@ export const clerkWebHook = async (req: Request, res: Response) => {
         // For this guide, log payload to console
         const { id } = evt.data
         const eventType = evt.type
-        // console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+        console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
         if (evt.type === 'user.created') {
-            // console.log('Webhook payload:', evt.data)
+            console.log('Webhook payload:', evt.data)
             await User.create({
                 clerkUserId: evt.data.id,
                 username: evt.data.username || evt.data.email_addresses[0].email_address,
