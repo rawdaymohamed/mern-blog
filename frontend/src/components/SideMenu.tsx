@@ -1,12 +1,15 @@
 import Link from "next/link";
 import SearchSmall from "./SearchSmall";
+import { Suspense } from "react";
 
 export default function SideMenu({ className = "" }: { className?: string }) {
   return (
     <div className={`${className} flex flex-col gap-8 h-max sticky top-8`}>
       <div>
         <h1 className="mb-4 text-sm font-semibold">Search</h1>
-        <SearchSmall />
+        <Suspense>
+          <SearchSmall />
+        </Suspense>
       </div>
       <div>
         <h1 className="mb-4 text-sm font-semibold">Filter</h1>

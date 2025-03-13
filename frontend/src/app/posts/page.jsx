@@ -23,7 +23,9 @@ const Page = () => {
           </Suspense>
         </div>
         <div className={`${isOpen ? "block" : "hidden"} md:block md:w-2/12`}>
-          <SideMenu />
+          <Suspense>
+            <SideMenu />
+          </Suspense>
         </div>
       </div>
     </div>

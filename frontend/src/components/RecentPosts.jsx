@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useMemo, useCallback } from "react";
+import { Suspense, useMemo } from "react";
 
 const fetchPosts = async ({ pageParam, searchParamsObj }) => {
   try {
