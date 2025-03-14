@@ -61,7 +61,7 @@ const PostList = () => {
                   className="mb-5"
                   key={post._id}
                   title={post.title}
-                  author={post.user.username}
+                  author={post?.user?.username}
                   time={post.updatedAt}
                   category={post.category}
                   imageURL={post.img}

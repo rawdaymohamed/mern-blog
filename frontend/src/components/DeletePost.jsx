@@ -11,7 +11,7 @@ export default function DeletePost({ post }) {
   const { user } = useUser();
   const { getToken } = useAuth();
   const isAdmin = user?.publicMetadata?.role === "admin";
-  const isPostOwner = user?.username === post.user.username;
+  const isPostOwner = user?.username === post.user?.username;
 
   const deletePostMutation = useMutation({
     mutationFn: async () => {
