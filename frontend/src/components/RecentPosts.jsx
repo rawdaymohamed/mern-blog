@@ -48,11 +48,12 @@ const PostList = () => {
         next={fetchNextPage}
         hasMore={!!hasNextPage}
         loader={<h4>Loading more posts...</h4>}
-        endMessage={
-          <p className="text-center text-gray-600 my-5">All posts loaded!</p>
-        }
+        // endMessage={
+        //   <p className="text-center text-gray-600 my-5">All posts loaded!</p>
+        // }
       >
-        <div className="space-y-10">
+        <div className="space-y-10 mb-8">
+          {allPosts.length === 0 && <div>No posts found</div>}
           {allPosts.map(
             (post) =>
               post && (

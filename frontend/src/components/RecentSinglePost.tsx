@@ -52,8 +52,10 @@ export default function RecentSinglePost({
             {author}
           </Link>
           <span className="text-gray-500">On</span>
-          <Link href="/" className="text-blue-600">
-            {category}
+          <Link href={`/posts?cat=${category}`} className="text-blue-600">
+            {category
+              .replace(/-/g, " ")
+              .replace(/\b\w/g, (char) => char.toUpperCase())}
           </Link>
           <span className="text-gray-500">{format(time)}</span>
         </div>
