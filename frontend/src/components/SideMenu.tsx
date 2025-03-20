@@ -1,96 +1,78 @@
-import Link from "next/link";
-import SearchSmall from "./SearchSmall";
-import { Suspense } from "react";
+"use client";
 
-export default function SideMenu({ className = "" }: { className?: string }) {
+import { useRouter, useSearchParams } from "next/navigation";
+import Search from "./Search";
+
+const SideMenu = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (params.get("sort") !== e.target.value) {
+      params.set("sort", e.target.value);
+      router.push(`?${params.toString()}`);
+    }
+  };
+
+  const handleCategoryChange = (category: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (params.get("cat") !== category) {
+      params.set("cat", category);
+      router.push(`?${params.toString()}`);
+    }
+  };
+
   return (
-    <div className={`${className} flex flex-col gap-8 h-max sticky top-8`}>
-      <div>
-        <h1 className="mb-4 text-sm font-semibold">Search</h1>
-        <Suspense>
-          <SearchSmall />
-        </Suspense>
+    <div className="px-4 h-max sticky top-8">
+      <h1 className="mb-4 text-sm font-medium">Search</h1>
+      <Search />
+
+      <h1 className="mt-8 mb-4 text-sm font-medium">Filter</h1>
+      <div className="flex flex-col gap-2 text-sm">
+        {["newest", "popular", "trending", "oldest"].map((option) => (
+          <label
+            key={option}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <input
+              type="radio"
+              name="sort"
+              value={option}
+              checked={searchParams.get("sort") === option}
+              onChange={handleFilterChange}
+              className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm bg-white checked:bg-blue-800"
+            />
+            {option.charAt(0).toUpperCase() + option.slice(1)}
+          </label>
+        ))}
       </div>
-      <div>
-        <h1 className="mb-4 text-sm font-semibold">Filter</h1>
-        <div className="flex flex-col gap-3">
-          <label
-            htmlFor="sort-newest"
-            className="cursor-pointer flex gap-2 items-center"
+
+      <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
+      <div className="flex flex-col gap-2 text-sm">
+        {[
+          { name: "All", value: "general" },
+          { name: "Web Design", value: "web-design" },
+          { name: "Development", value: "development" },
+          { name: "Databases", value: "databases" },
+          { name: "Search Engines", value: "seo" },
+          { name: "Marketing", value: "marketing" },
+        ].map((cat) => (
+          <span
+            key={cat.value}
+            className={`underline cursor-pointer ${
+              searchParams.get("cat") === cat.value ? "font-bold" : ""
+            }`}
+            onClick={() => handleCategoryChange(cat.value)}
           >
-            <input
-              type="radio"
-              name="sort"
-              id="sort-newest"
-              value="newest"
-              className="appearance-none cursor-pointer w-4 h-4 border-[1.5px] rounded-sm border-blue-800 bg-white checked:bg-blue-800"
-            />
-            Newest
-          </label>
-          <label
-            htmlFor="sort-popular"
-            className="cursor-pointer flex gap-2 items-center"
-          >
-            <input
-              type="radio"
-              name="sort"
-              id="sort-popular"
-              value="popular"
-              className="appearance-none cursor-pointer w-4 h-4 border-[1.5px] rounded-sm border-blue-800 bg-white checked:bg-blue-800"
-            />
-            Most Popular
-          </label>
-          <label
-            htmlFor="sort-trending"
-            className="cursor-pointer flex gap-2 items-center"
-          >
-            <input
-              type="radio"
-              name="sort"
-              id="sort-trending"
-              value="trending"
-              className="appearance-none cursor-pointer w-4 h-4 border-[1.5px] rounded-sm border-blue-800 bg-white checked:bg-blue-800"
-            />
-            Trending
-          </label>
-          <label
-            htmlFor="sort-oldest"
-            className="cursor-pointer flex gap-2 items-center"
-          >
-            <input
-              type="radio"
-              name="sort"
-              id="sort-oldest"
-              value="oldest"
-              className="appearance-none  w-4 h-4 border-[1.5px] rounded-sm border-blue-800 bg-white checked:bg-blue-800"
-            />
-            Oldest
-          </label>
-        </div>
-      </div>
-      <div>
-        <h1 className="mb-4 text-sm font-semibold">Categories</h1>
-        <div className="flex flex-col gap-3">
-          <Link href="/posts?cat=" className="underline">
-            All
-          </Link>
-          <Link href="/posts?cat=" className="underline">
-            Web Design
-          </Link>
-          <Link href="/posts?cat=" className="underline">
-            Development
-          </Link>
-          <Link href="/posts?cat=" className="underline">
-            Databases
-          </Link>
-          <Link href="/posts?cat=" className="underline">
-            Search Engines
-          </Link>
-          <Link href="/posts?cat=" className="underline">
-            Marketing
-          </Link>
-        </div>
+            {cat.name}
+          </span>
+        ))}
       </div>
     </div>
   );
-}
+};
+
+export default SideMenu;

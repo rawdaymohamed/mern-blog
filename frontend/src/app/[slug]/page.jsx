@@ -64,13 +64,15 @@ const Page = () => {
         </div>
         {/* Image */}
         <div className="hidden lg:block lg:w-4/12">
-          <Image
-            src={post?.img}
-            height={200}
-            width={300}
-            className="rounded-2xl w-full object-cover aspect-video"
-            alt=""
-          />
+          {post?.img && (
+            <Image
+              src={post?.img}
+              height={200}
+              width={300}
+              className="rounded-2xl w-full object-cover aspect-video"
+              alt=""
+            />
+          )}
         </div>
       </div>
 
@@ -87,13 +89,15 @@ const Page = () => {
             <h2 className="font-bold mb-2">Author</h2>
             <div className="flex gap-4 items-center">
               {/* Image */}
-              <Image
-                src={post?.user?.img}
-                height={50}
-                width={50}
-                className="rounded-full aspect-square"
-                alt="Author"
-              />
+              {post?.user?.img && (
+                <Image
+                  src={post?.user?.img}
+                  height={50}
+                  width={50}
+                  className="rounded-full aspect-square"
+                  alt="Author"
+                />
+              )}
               {/* Name */}
               <p className="text-blue-600">{post?.user?.username}</p>
             </div>
