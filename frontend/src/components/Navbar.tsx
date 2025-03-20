@@ -37,8 +37,8 @@ export default function Navbar() {
             }`}
           >
             <Link href="/">Home</Link>
-            <Link href="/">Trending</Link>
-            <Link href="/">Most Popular</Link>
+            <Link href="/posts?sort=trending">Trending</Link>
+            <Link href="/posts?sort=popular">Most Popular</Link>
             <Link href="/">About</Link>
             <SignedOut>
               <Link href="/sign-in">
@@ -57,8 +57,8 @@ export default function Navbar() {
       {/* Desktop Menu */}
       <div className="hidden md:flex gap-6 xl:gap-8 font-medium items-center">
         <Link href="/">Home</Link>
-        <Link href="/">Trending</Link>
-        <Link href="/">Most Popular</Link>
+        <Link href="/posts?sort=trending">Trending</Link>
+        <Link href="/posts?sort=popular">Most Popular</Link>
         <Link href="/">About</Link>
         <Link href="/"></Link>
         <SignedOut>

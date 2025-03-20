@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchSmall from "./SearchSmall";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function MainCategories({
   className = "",
@@ -11,10 +11,17 @@ export default function MainCategories({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    setQuery(searchParams.get("q") || "");
+  }, [searchParams]);
 
   const handleCategoryChange = (category: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
+    if (query) {
+      params.set("q", query);
+    }
     if (category === "all") {
       params.delete("cat"); // Remove filter to show all posts
     } else {

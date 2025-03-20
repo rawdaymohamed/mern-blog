@@ -8,7 +8,7 @@ const Page = () => {
 
   return (
     <div className="text-gray-800">
-      <h1 className="mt-3 mb-8 text-2xl">Development Blog</h1>
+      <h1 className="mt-3 mb-8 text-2xl">Blog Results</h1>
       <button
         className="md:hidden bg-blue-800 text-white text-sm px-4 py-2 rounded-2xl mb-4"
         onClick={() => setIsOpen((prev) => !prev)}

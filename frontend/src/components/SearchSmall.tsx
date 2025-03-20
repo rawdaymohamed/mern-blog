@@ -8,22 +8,22 @@ const SearchSmall: React.FC = () => {
   const searchParams = useSearchParams();
 
   // Extract search query from URL
-  const searchQuery = searchParams.get("search") || "";
+  const searchQuery = searchParams.get("q") || "";
   const [query, setQuery] = useState<string>(searchQuery);
 
   useEffect(() => {
-    // Update input field if search query in URL changes
-    setQuery(searchQuery);
+    if (query !== searchQuery) {
+      setQuery(searchQuery);
+    }
   }, [searchQuery]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const params = new URLSearchParams(searchParams.toString());
-      params.set("search", query);
+      params.set("q", query);
       router.push(`/posts?${params.toString()}`);
     }
   };
-
   return (
     <Suspense>
       <div className="relative w-full">

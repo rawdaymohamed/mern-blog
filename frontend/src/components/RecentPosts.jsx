@@ -22,10 +22,9 @@ const fetchPosts = async ({ pageParam, searchParamsObj }) => {
 const PostList = () => {
   const searchParams = useSearchParams();
 
-  const searchParamsObj = useMemo(
-    () => Object.fromEntries([...searchParams.entries()]),
-    [searchParams]
-  );
+  const searchParamsObj = useMemo(() => {
+    return Object.fromEntries([...searchParams.entries()]);
+  }, [searchParams.toString()]);
 
   const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } =
     useInfiniteQuery({
