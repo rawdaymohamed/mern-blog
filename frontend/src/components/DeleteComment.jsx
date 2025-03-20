@@ -10,7 +10,7 @@ export default function DeleteComment({ comment, slug }) {
   const { getToken } = useAuth();
 
   const isAdmin = user?.publicMetadata?.role === "admin";
-  const isCommentOwner = user?.username === comment.user.username;
+  const isCommentOwner = user?.username === comment?.user?.username;
 
   const queryClient = useQueryClient();
   const deleteCommentMutation = useMutation({

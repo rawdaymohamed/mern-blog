@@ -9,7 +9,7 @@ export default function SingleComment({ className, comment }) {
     <div className={`${className} flex flex-col gap-2 mb-5 p-4 rounded-xl`}>
       {/* Comment Author */}
       <div className="flex gap-4 items-center">
-        {comment.user.img && (
+        {comment?.user?.img && (
           <Image
             src={comment?.user?.img}
             height={50}
@@ -19,7 +19,7 @@ export default function SingleComment({ className, comment }) {
           />
         )}
         <p className="font-bold text-base text-gray-700">
-          {comment?.user.username}
+          {comment?.user?.username}
         </p>
         <span className="text-xs text-gray-500">
           {format(comment.createdAt)}
