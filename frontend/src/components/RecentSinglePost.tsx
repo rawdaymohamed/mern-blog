@@ -36,11 +36,11 @@ export default function RecentSinglePost({
             alt="web design post"
             width={200}
             height={200}
-            className="w-full h-auto object-cover rounded-xl mb-1"
+            className="w-full h-[160px] object-cover rounded- xl mb-1"
           />
         )}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
         {/* Title */}
         <h2 className="font-extrabold text-2xl md:text-3xl text-gray-700 mb-3">
           {title}
@@ -60,13 +60,13 @@ export default function RecentSinglePost({
           <span className="text-gray-500">{format(time)}</span>
         </div>
         {/* Body */}
-        <div className="text-sm xl:text-lg text-gray-500 mb-2">
+        {/* <div className="text-sm xl:text-lg text-gray-500 mb-2">
           <div
             dangerouslySetInnerHTML={{
               __html: cleanedContent.substring(0, 40),
             }}
           />
-        </div>
+        </div> */}
 
         {/* Read more */}
         <Link
