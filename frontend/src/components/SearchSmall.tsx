@@ -8,7 +8,7 @@ const SearchSmall: React.FC = () => {
   const searchParams = useSearchParams();
 
   // Extract search query from URL
-  const searchQuery = searchParams.get("q") || "";
+  const searchQuery = searchParams.get("search") || "";
   const [query, setQuery] = useState<string>(searchQuery);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const SearchSmall: React.FC = () => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const params = new URLSearchParams(searchParams.toString());
-      params.set("q", query);
+      params.set("search", query);
       router.push(`/posts?${params.toString()}`);
     }
   };

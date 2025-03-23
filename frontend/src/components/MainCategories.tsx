@@ -13,14 +13,14 @@ export default function MainCategories({
   const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
   useEffect(() => {
-    setQuery(searchParams.get("q") || "");
+    setQuery(searchParams.get("search") || "");
   }, [searchParams]);
 
   const handleCategoryChange = (category: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (query) {
-      params.set("q", query);
+      params.set("search", query);
     }
     if (category === "all") {
       params.delete("cat"); // Remove filter to show all posts
