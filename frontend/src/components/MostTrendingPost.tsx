@@ -19,7 +19,7 @@ export default function MostTrendingPost({
       {/* Post details */}
       <div className="flex gap-4 items-center">
         <span className="font-bold bg-yellow-100 px-1">01.</span>
-        <Link href="/" className="text-blue-600 text-sm">
+        <Link href={`/posts?cat=web-design`} className="text-blue-600 text-sm">
           Web Design
         </Link>
         <span className="text-gray-500 text-sm">2 days ago</span>

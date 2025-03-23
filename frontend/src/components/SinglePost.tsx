@@ -29,8 +29,13 @@ export default function SinglePost({
       <div className="w-2/3 flex flex-col gap-2 justify-start">
         <div className="flex items-center gap-4">
           <span className="font-bold  text-xs">{postNumber}</span>
-          <Link href="/" className="text-blue-600 text-xs">
-            {category}
+          <Link
+            href={`/posts?cat=${category}`}
+            className="text-blue-600 text-xs"
+          >
+            {category
+              .replace(/-/g, " ")
+              .replace(/\b\w/g, (char) => char.toUpperCase())}
           </Link>
           <span className="text-gray-500 text-xs">{time}</span>
         </div>

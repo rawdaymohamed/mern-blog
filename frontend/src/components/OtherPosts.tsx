@@ -6,7 +6,7 @@ export default function OtherPosts({ className = "" }: { className?: string }) {
       {/* First Post */}
       <SinglePost
         className="h-1/3"
-        category="Web Design"
+        category="web-design"
         postNumber="02"
         time="1 day ago"
         title="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
@@ -16,7 +16,7 @@ export default function OtherPosts({ className = "" }: { className?: string }) {
       {/* Second Post */}
       <SinglePost
         className="h-1/3"
-        category="Web Development"
+        category="web-development"
         postNumber="03"
         time="2 days ago"
         title="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
@@ -25,7 +25,7 @@ export default function OtherPosts({ className = "" }: { className?: string }) {
       {/* Third Post */}
       <SinglePost
         className="h-1/3"
-        category="Web Design"
+        category="web-design"
         postNumber="04"
         time="3 days ago"
         title="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
