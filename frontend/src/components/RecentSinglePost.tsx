@@ -36,7 +36,7 @@ export default function RecentSinglePost({
             alt="web design post"
             width={200}
             height={200}
-            className="w-full h-[160px] object-cover rounded- xl mb-1"
+            className="w-full h-[160px] object-cover rounded-xl mb-1"
           />
         )}
       </div>
