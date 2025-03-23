@@ -10,7 +10,7 @@ export default function MostTrendingPost({
     <section className={`${className} flex flex-col gap-3`}>
       {/* Post Image */}
       <Image
-        src="/trending-post.jpg"
+        src="/team.jpg"
         alt="web design post"
         width={200}
         height={200}
@@ -26,15 +26,16 @@ export default function MostTrendingPost({
       </div>
       {/* Post Title */}
       <Link
-        href="/top-web-design-trends-shaping-the-future-of-the-web"
+        href="/beyond-the-code-why-soft-skills-are-your-superpower"
         className="font-extrabold text-2xl text-gray-700"
       >
-        Top Web Design Trends Shaping the Future of the Web
+        Beyond the Code: Why Soft Skills Are Your Superpower
       </Link>
       <p className="text-gray-500">
-        Discover how strategically using white space (negative space) can
-        elevate your web designs, improve readability, and create a more
-        impactful user experience. Learn practical tips and examples.
+        In a world increasingly driven by technology and hard skills, it's easy
+        to overlook the importance of something a little less tangible: soft
+        skills. But here's the truth – in the professional landscape, soft
+        skills aren't just "nice to have," they're your superpower.
       </p>
     </section>
   );

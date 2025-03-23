@@ -10,7 +10,7 @@ export default function OtherPosts({ className = "" }: { className?: string }) {
         postNumber="02"
         time="1 day ago"
         title="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
-        imageURL="/post-1.jpg"
+        imageURL="/trending-1.jpeg"
       />
 
       {/* Second Post */}
@@ -20,7 +20,7 @@ export default function OtherPosts({ className = "" }: { className?: string }) {
         postNumber="03"
         time="2 days ago"
         title="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
-        imageURL="/post-1.jpg"
+        imageURL="/trending-2.jpg"
       />
       {/* Third Post */}
       <SinglePost
@@ -29,7 +29,7 @@ export default function OtherPosts({ className = "" }: { className?: string }) {
         postNumber="04"
         time="3 days ago"
         title="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
-        imageURL="/post-1.jpg"
+        imageURL="/trending-3.jpg"
       />
     </section>
   );
