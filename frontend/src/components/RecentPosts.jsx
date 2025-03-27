@@ -61,7 +61,7 @@ const PostList = () => {
                   key={post._id}
                   title={post.title}
                   author={post?.user?.username}
-                  time={post.updatedAt}
+                  time={post.createdAt}
                   category={post.category}
                   imageURL={post.img}
                   body={post.content}
